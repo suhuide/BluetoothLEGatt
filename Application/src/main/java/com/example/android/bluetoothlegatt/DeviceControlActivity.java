@@ -17,6 +17,7 @@
 package com.example.android.bluetoothlegatt;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
@@ -31,9 +32,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,6 +54,11 @@ public class DeviceControlActivity extends Activity {
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
 
+    private byte[] cmd = {0x10};
+    private Button mButton_r;
+    private Button mButton_w;
+    private Button mButton_n;
+    private Button mButton_dmp;
     private TextView mConnectionState;
     private TextView mDataField;
     private String mDeviceName;
@@ -168,12 +176,103 @@ public class DeviceControlActivity extends Activity {
         mGattServicesList.setOnChildClickListener(servicesListClickListner);
         mConnectionState = (TextView) findViewById(R.id.connection_state);
         mDataField = (TextView) findViewById(R.id.data_value);
+        mButton_r = (Button) findViewById(R.id.button_r);
+        mButton_w = (Button) findViewById(R.id.button_w);
+        mButton_n = (Button) findViewById(R.id.button_n);
+        mButton_dmp = (Button) findViewById(R.id.button_dmp);
+        mButton_r.setOnClickListener(listener_r);
+        mButton_w.setOnClickListener(listener_w);
+        mButton_n.setOnClickListener(listener_n);
+        mButton_dmp.setOnClickListener(listener_dmp);
 
         getActionBar().setTitle(mDeviceName);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
     }
+
+    Button.OnClickListener listener_r = new Button.OnClickListener() {
+        public void onClick(View v) {
+            mButton_r.setBackgroundColor(0xFFFF0000);
+            Toast myToast = Toast.makeText(DeviceControlActivity.this, "Characteristic read",Toast.LENGTH_LONG);
+            myToast.show() ;
+            if (mGattCharacteristics != null) {
+                final BluetoothGattCharacteristic characteristic =
+                        mGattCharacteristics.get(3).get(0);
+                final int charaProp = characteristic.getProperties();
+                if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
+                    // If there is an active notification on a characteristic, clear
+                    // it first so it doesn't update the data field on the user interface.
+                    if (mNotifyCharacteristic != null) {
+                        mBluetoothLeService.setCharacteristicNotification(
+                                mNotifyCharacteristic, false);
+                        mNotifyCharacteristic = null;
+                    }
+
+                    mBluetoothLeService.readCharacteristic(characteristic);
+                }
+                if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                    mNotifyCharacteristic = characteristic;
+                    mBluetoothLeService.setCharacteristicNotification(
+                            characteristic, true);
+                }
+            }
+        }
+    };
+
+    Button.OnClickListener listener_w = new Button.OnClickListener() {
+        public void onClick(View v) {
+            mButton_w.setBackgroundColor(0xFF00FF00);
+            if (mGattCharacteristics != null) {
+                final BluetoothGattCharacteristic characteristic =
+                        mGattCharacteristics.get(3).get(0);
+                final int charaProp = characteristic.getProperties();
+                if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
+                    // If there is an active notification on a characteristic, clear
+                    // it first so it doesn't update the data field on the user interface.
+                    if (mNotifyCharacteristic != null) {
+                        mBluetoothLeService.setCharacteristicNotification(
+                                mNotifyCharacteristic, false);
+                        mNotifyCharacteristic = null;
+                    }
+                    Toast myToast = Toast.makeText(DeviceControlActivity.this, "Characteristic write" + mBluetoothLeService.byteArrayToString(cmd),Toast.LENGTH_LONG);
+                    myToast.show() ;
+                    byte[] dataByte = mBluetoothLeService.getCharacteristicData();
+                    dataByte[9] = cmd[0];
+                    if(cmd[0]++ > 0x1A)
+                        cmd[0] = 0x10;
+                    mBluetoothLeService.writeCharacteristic(characteristic,dataByte);
+                }
+                if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                    mNotifyCharacteristic = characteristic;
+                    mBluetoothLeService.setCharacteristicNotification(
+                            characteristic, true);
+                }
+            }
+        }
+    };
+
+    Button.OnClickListener listener_n = new Button.OnClickListener() {
+        public void onClick(View v) {
+            mButton_n.setBackgroundColor(0xFF0000FF);
+            Toast myToast = Toast.makeText(DeviceControlActivity.this, "Characteristic noticfy",Toast.LENGTH_LONG);
+            myToast.show() ;
+        }
+    };
+
+    Button.OnClickListener listener_dmp = new Button.OnClickListener() {
+        public void onClick(View v) {
+            mButton_dmp.setBackgroundColor(0xFF0000FF);
+
+            Toast myToast = Toast.makeText(DeviceControlActivity.this, "Characteristic dmp",Toast.LENGTH_LONG);
+            myToast.show() ;
+
+            final Intent intent = new Intent(DeviceControlActivity.this, DMPActivity.class);
+            //intent.putExtra(DMPActivity.EXTRAS_DEVICE_NAME, DeviceControlActivity.EXTRAS_DEVICE_NAME);
+            //intent.putExtra(DMPActivity.EXTRAS_DEVICE_ADDRESS, DeviceControlActivity.EXTRAS_DEVICE_ADDRESS);
+            startActivity(intent);
+        }
+    };
 
     @Override
     protected void onResume() {

@@ -47,6 +47,7 @@ public class BluetoothLeService extends Service {
     private String mBluetoothDeviceAddress;
     private BluetoothGatt mBluetoothGatt;
     private int mConnectionState = STATE_DISCONNECTED;
+    private byte[] characteristicData;
 
     private static final int STATE_DISCONNECTED = 0;
     private static final int STATE_CONNECTING = 1;
@@ -65,6 +66,8 @@ public class BluetoothLeService extends Service {
 
     public final static UUID UUID_HEART_RATE_MEASUREMENT =
             UUID.fromString(SampleGattAttributes.HEART_RATE_MEASUREMENT);
+
+    public final static UUID UUID_DMP = UUID.fromString("76e137ac-b15f-49d7-9c4c-e278e6492ada");//76e137ac-b15f-49d7-9c4c-e278e6492ad9
 
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
@@ -144,6 +147,7 @@ public class BluetoothLeService extends Service {
             final byte[] data = characteristic.getValue();
             if (data != null && data.length > 0) {
                 final StringBuilder stringBuilder = new StringBuilder(data.length);
+                characteristicData = data;
                 for(byte byteChar : data)
                     stringBuilder.append(String.format("%02X ", byteChar));
                 intent.putExtra(EXTRA_DATA, new String(data) + "\n" + stringBuilder.toString());
@@ -302,7 +306,47 @@ public class BluetoothLeService extends Service {
                     UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
             descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
             mBluetoothGatt.writeDescriptor(descriptor);
+        }else if (UUID_DMP.equals(characteristic.getUuid())) {
+            for(BluetoothGattDescriptor dp: characteristic.getDescriptors()){
+                if (dp != null) {
+                    if ((characteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0) {
+                        dp.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+                    } else if ((characteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_INDICATE) != 0) {
+                        dp.setValue(BluetoothGattDescriptor.ENABLE_INDICATION_VALUE);
+                    }
+                    dp.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+                    mBluetoothGatt.writeDescriptor(dp);
+                }
+            }
         }
+    }
+
+    public boolean writeCharacteristic(BluetoothGattCharacteristic characteristic,
+                                              byte[] characteristicValue){
+        if (characteristic != null) {
+            characteristic.setValue(characteristicValue);
+            return mBluetoothGatt.writeCharacteristic(characteristic);
+        }
+        return false;
+    }
+
+    public byte[] getCharacteristicData() {
+        byte[] d = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+        if(characteristicData == null) {
+            characteristicData = d;
+        }
+
+        return characteristicData;
+    }
+
+    public String byteArrayToString(byte[] a) {
+        StringBuilder sb = new StringBuilder();
+
+        if(a != null)
+            for(byte b : a){
+                sb.append(String.format("%02X ", b));
+            }
+        return sb.toString();
     }
 
     /**

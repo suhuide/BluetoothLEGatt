@@ -1,125 +1,146 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:1-52:12
-INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:1-52:12
-INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:1-52:12
-MERGED from [com.android.support:support-v13:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-v13-27.0.2.aar\97e43c28cb9147a0405fd5a772cc6ba0\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-v4:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\52d173329252095d4e9811869306cd5a\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\2906d24cc7e28f5d26fc3011519c37e7\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\b5bb99c057abb37403df92351e75b9d5\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\8d62e3f05d040f51fa0dd2b7db4328a4\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\254b5577f2c24af42524f165aee3cc04\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\55da2688c9f5d7a02f2466b1802677e0\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\f44b991fc8fcb397b651d0753f00cebe\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\c32b0b2661f403f74af5b3e0b87d0a16\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\58b66caed35cb91a29837533c1c29376\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\8c695817bdd62560906c8ff63b8ec6aa\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\4c50ba4f63101edf1f877510dc04b716\AndroidManifest.xml:17:1-24:12
-INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:1-52:12
-INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:1-52:12
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:1-62:12
+INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:1-62:12
+INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:1-62:12
+MERGED from [com.android.support:support-v13:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-v13-27.0.2.aar\5e1da1af2c7c21db8774ceadacfb4191\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\e3f47a8c73cfd00083949d11e8b623c0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\dc36d52c340efe460e2b404429153ed3\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\8f053ff5885e7eeaa55bd38c49b95583\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\a4933c677f45068e7e936c28461bca61\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\053d2450653416ef672ed191da086e35\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\774c1af6b972066bed8230ef9cbe6eb6\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\716b6ffad258ef6641b540733692ee88\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\e5bf4a0c0378d57f45eab9c37cd39692\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\d042259b63ab96526195c50754085a1d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\6bb9bda80433706a4025aff09313fd3b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\e57d770e130ec2b9628d7114d33f8974\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\3c1187091e001cf6cc51d386b50309f5\AndroidManifest.xml:17:1-24:12
+INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:1-62:12
+INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:1-62:12
 	package
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:21:5-50
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:21:5-50
 	android:versionName
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:23:5-30
-		INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
-		INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:23:5-30
+		INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:11-69
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:11-69
 	android:versionCode
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:22:5-28
-		INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
-		INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:22:5-28
+		INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
 uses-feature#android.hardware.bluetooth_le
-ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:31:5-89
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:31:5-89
 	android:required
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:31:64-87
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:31:64-87
 	android:name
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:31:19-63
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:31:19-63
 uses-permission#android.permission.BLUETOOTH
-ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:33:5-67
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:33:5-67
 	android:name
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:33:22-65
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:33:22-65
 uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:34:5-73
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:34:5-73
 	android:name
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:34:22-71
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:34:22-71
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:35:5-78
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:35:5-78
 	android:name
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:35:22-76
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:35:22-76
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:36:5-80
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:36:5-80
 	android:name
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:36:22-78
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:36:22-78
 application
-ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:38:5-50:19
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:38:5-60:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\a4933c677f45068e7e936c28461bca61\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\a4933c677f45068e7e936c28461bca61\AndroidManifest.xml:9:5-20
 	android:label
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:38:18-50
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:38:18-50
 	android:icon
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:39:9-45
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:39:9-45
 	android:theme
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:40:9-56
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:40:9-56
 activity#com.example.android.bluetoothlegatt.DeviceScanActivity
-ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:41:9-47:20
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:41:9-47:20
 	android:label
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:42:13-45
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:42:13-45
 	android:name
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:41:19-53
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:41:19-53
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:43:13-46:29
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:43:13-46:29
 action#android.intent.action.MAIN
-ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:44:17-68
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:44:17-68
 	android:name
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:44:25-66
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:44:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:45:17-76
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:45:17-76
 	android:name
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:45:27-74
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:45:27-74
+activity#com.example.android.bluetoothlegatt.DMPActivity
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:48:9-56:20
+	android:label
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:50:13-40
+	android:name
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:49:13-40
+intent-filter#action:name:DMPActivity+category:name:android.intent.category.DEFAULT
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:51:13-55:29
+action#DMPActivity
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:52:17-53
+	android:name
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:52:25-51
+category#android.intent.category.DEFAULT
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:53:17-75
+	android:name
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:53:27-73
 activity#com.example.android.bluetoothlegatt.DeviceControlActivity
-ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:48:9-58
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:58:9-58
 	android:name
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:48:19-56
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:58:19-56
 service#com.example.android.bluetoothlegatt.BluetoothLeService
-ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:49:9-77
+ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:59:9-77
 	android:enabled
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:49:53-75
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:59:53-75
 	android:name
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:49:18-52
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:59:18-52
 uses-sdk
-INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
-INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
-MERGED from [com.android.support:support-v13:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-v13-27.0.2.aar\97e43c28cb9147a0405fd5a772cc6ba0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v13:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-v13-27.0.2.aar\97e43c28cb9147a0405fd5a772cc6ba0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\52d173329252095d4e9811869306cd5a\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\52d173329252095d4e9811869306cd5a\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\2906d24cc7e28f5d26fc3011519c37e7\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\2906d24cc7e28f5d26fc3011519c37e7\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\b5bb99c057abb37403df92351e75b9d5\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\b5bb99c057abb37403df92351e75b9d5\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\8d62e3f05d040f51fa0dd2b7db4328a4\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\8d62e3f05d040f51fa0dd2b7db4328a4\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\254b5577f2c24af42524f165aee3cc04\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\254b5577f2c24af42524f165aee3cc04\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\55da2688c9f5d7a02f2466b1802677e0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\55da2688c9f5d7a02f2466b1802677e0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\f44b991fc8fcb397b651d0753f00cebe\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\f44b991fc8fcb397b651d0753f00cebe\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\c32b0b2661f403f74af5b3e0b87d0a16\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\c32b0b2661f403f74af5b3e0b87d0a16\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\58b66caed35cb91a29837533c1c29376\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\58b66caed35cb91a29837533c1c29376\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\8c695817bdd62560906c8ff63b8ec6aa\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.0.2] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\8c695817bdd62560906c8ff63b8ec6aa\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\4c50ba4f63101edf1f877510dc04b716\AndroidManifest.xml:20:5-22:41
-MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\suhuide\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\4c50ba4f63101edf1f877510dc04b716\AndroidManifest.xml:20:5-22:41
-INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
-INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+MERGED from [com.android.support:support-v13:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-v13-27.0.2.aar\5e1da1af2c7c21db8774ceadacfb4191\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v13:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-v13-27.0.2.aar\5e1da1af2c7c21db8774ceadacfb4191\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\e3f47a8c73cfd00083949d11e8b623c0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\e3f47a8c73cfd00083949d11e8b623c0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\dc36d52c340efe460e2b404429153ed3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\dc36d52c340efe460e2b404429153ed3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\8f053ff5885e7eeaa55bd38c49b95583\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\8f053ff5885e7eeaa55bd38c49b95583\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\a4933c677f45068e7e936c28461bca61\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\a4933c677f45068e7e936c28461bca61\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\053d2450653416ef672ed191da086e35\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\053d2450653416ef672ed191da086e35\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\774c1af6b972066bed8230ef9cbe6eb6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\774c1af6b972066bed8230ef9cbe6eb6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\716b6ffad258ef6641b540733692ee88\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\716b6ffad258ef6641b540733692ee88\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\e5bf4a0c0378d57f45eab9c37cd39692\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\e5bf4a0c0378d57f45eab9c37cd39692\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\d042259b63ab96526195c50754085a1d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\d042259b63ab96526195c50754085a1d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\6bb9bda80433706a4025aff09313fd3b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\6bb9bda80433706a4025aff09313fd3b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\e57d770e130ec2b9628d7114d33f8974\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.0.2] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\e57d770e130ec2b9628d7114d33f8974\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\3c1187091e001cf6cc51d386b50309f5\AndroidManifest.xml:20:5-22:41
+MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\ersu\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\3c1187091e001cf6cc51d386b50309f5\AndroidManifest.xml:20:5-22:41
+INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
-		INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
-		INJECTED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+		ADDED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml

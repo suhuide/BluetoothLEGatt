@@ -56,6 +56,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.android.bluetoothlegatt.DMPActivity"
+            android:label="DMPActivity" >
+            <intent-filter>
+                <action android:name="DMPActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name="com.example.android.bluetoothlegatt.DeviceControlActivity" />
 
         <service
