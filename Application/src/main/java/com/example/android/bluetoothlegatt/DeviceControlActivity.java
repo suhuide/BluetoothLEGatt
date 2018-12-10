@@ -268,8 +268,8 @@ public class DeviceControlActivity extends Activity {
             myToast.show() ;
 
             final Intent intent = new Intent(DeviceControlActivity.this, DMPActivity.class);
-            //intent.putExtra(DMPActivity.EXTRAS_DEVICE_NAME, DeviceControlActivity.EXTRAS_DEVICE_NAME);
-            //intent.putExtra(DMPActivity.EXTRAS_DEVICE_ADDRESS, DeviceControlActivity.EXTRAS_DEVICE_ADDRESS);
+            intent.putExtra(DMPActivity.EXTRAS_DMP_DEVICE_NAME, mDeviceName);
+            intent.putExtra(DMPActivity.EXTRAS_DMP_DEVICE_NAME, mDeviceAddress);
             startActivity(intent);
         }
     };

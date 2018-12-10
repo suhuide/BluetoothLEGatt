@@ -50,8 +50,8 @@ import java.util.List;
 public class DMPActivity extends Activity {
     private final static String TAG = DMPActivity.class.getSimpleName();
 
-    public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
-    public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
+    public static final String EXTRAS_DMP_DEVICE_NAME = "DEVICE_NAME";
+    public static final String EXTRAS_DMP_DEVICE_ADDRESS = "DEVICE_ADDRESS";
 
     private byte[] cmd = {0x10};
     private Button mButton_r;
@@ -166,8 +166,8 @@ public class DMPActivity extends Activity {
         setContentView(R.layout.dmp_device);
 
         final Intent intent = getIntent();
-        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
-        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+        mDeviceName = intent.getStringExtra(EXTRAS_DMP_DEVICE_NAME);
+        mDeviceAddress = intent.getStringExtra(EXTRAS_DMP_DEVICE_ADDRESS);
 
         // Sets up UI references.
         ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
@@ -267,8 +267,8 @@ public class DMPActivity extends Activity {
             myToast.show() ;
 
             final Intent intent = new Intent(DMPActivity.this, DeviceControlActivity.class);
-            //intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, DMPActivity.EXTRAS_DEVICE_NAME);
-            //intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, DMPActivity.EXTRAS_DEVICE_ADDRESS);
+            intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, mDeviceName);
+            intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, mDeviceAddress);
             startActivity(intent);
         }
     };
