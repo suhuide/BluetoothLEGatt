@@ -17,7 +17,6 @@
 package com.example.android.bluetoothlegatt;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
@@ -41,6 +40,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * For a given BLE device, this Activity provides the user interface to connect, display data,
@@ -72,6 +72,9 @@ public class DeviceControlActivity extends Activity {
 
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
+
+    List<Map<String, String>> device_list = new ArrayList<Map<String, String>>();
+    List<List<Map<String, String>>> sensor_items = new ArrayList<List<Map<String, String>>>();
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -130,6 +133,11 @@ public class DeviceControlActivity extends Activity {
                 @Override
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
                                             int childPosition, long id) {
+                    if(true) {
+                        if (sensor_items != null) {
+                            sensor_items.get(childPosition);
+                        }
+                    }else{
                     if (mGattCharacteristics != null) {
                         final BluetoothGattCharacteristic characteristic =
                                 mGattCharacteristics.get(groupPosition).get(childPosition);
@@ -152,8 +160,10 @@ public class DeviceControlActivity extends Activity {
                         }
                         return true;
                     }
+                    }
                     return false;
                 }
+
     };
 
     private void clearUI() {
@@ -257,6 +267,27 @@ public class DeviceControlActivity extends Activity {
             mButton_n.setBackgroundColor(0xFF0000FF);
             Toast myToast = Toast.makeText(DeviceControlActivity.this, "Characteristic noticfy",Toast.LENGTH_LONG);
             myToast.show() ;
+            if(true) {
+                //Create Menu
+                String[] names = {"12345678", "abcdefgh", "wxyz4321"};
+                //Create subMenu
+                String[] child_names = {"Temperatrue: 32 'C", "Humidity: 50%", "Pressure:343", "Amblight:453", "UV index: 2", "Mic: ", "IAQ Tvoc:3445", "IAQ eco2:222","Hall status: Open","Hall value:1234"};
+                device_list.clear();
+                sensor_items.clear();
+                for (int i = 0; i < names.length; i++) {
+                    Map<String, String> namedata = new HashMap<String, String>();
+                    namedata.put("names", names[i]);
+                    device_list.add(namedata);
+
+                    List<Map<String, String>> child_map = new ArrayList<Map<String, String>>();
+                    for (int j = 0; j < child_names.length; j++) {
+                        Map<String, String> mapcs = new HashMap<String, String>();
+                        mapcs.put("child_names", child_names[j]);
+                        child_map.add(mapcs);
+                    }
+                    sensor_items.add(child_map);
+                }
+            }
         }
     };
 
@@ -266,11 +297,23 @@ public class DeviceControlActivity extends Activity {
 
             Toast myToast = Toast.makeText(DeviceControlActivity.this, "Characteristic dmp",Toast.LENGTH_LONG);
             myToast.show() ;
-
-            final Intent intent = new Intent(DeviceControlActivity.this, DMPActivity.class);
-            intent.putExtra(DMPActivity.EXTRAS_DMP_DEVICE_NAME, mDeviceName);
-            intent.putExtra(DMPActivity.EXTRAS_DMP_DEVICE_NAME, mDeviceAddress);
-            startActivity(intent);
+            if(true)
+            {
+                SimpleExpandableListAdapter sela = new SimpleExpandableListAdapter(
+                        DeviceControlActivity.this,
+                        device_list,
+                        R.layout.device_list,
+                        new String[]{"names"},
+                        new int[]{R.id.textGroup},
+                        sensor_items,
+                        R.layout.sensor_items,
+                        new String[]{"child_names"},
+                        new int[]{R.id.textChild});
+                // Clear list
+                mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
+                // enqueue
+                mGattServicesList.setAdapter(sela);
+            }
         }
     };
 
@@ -383,19 +426,20 @@ public class DeviceControlActivity extends Activity {
             mGattCharacteristics.add(charas);
             gattCharacteristicData.add(gattCharacteristicGroupData);
         }
-
+        if(false) {
         SimpleExpandableListAdapter gattServiceAdapter = new SimpleExpandableListAdapter(
                 this,
                 gattServiceData,
                 android.R.layout.simple_expandable_list_item_2,
-                new String[] {LIST_NAME, LIST_UUID},
-                new int[] { android.R.id.text1, android.R.id.text2 },
+                new String[]{LIST_NAME, LIST_UUID},
+                new int[]{android.R.id.text1, android.R.id.text2},
                 gattCharacteristicData,
                 android.R.layout.simple_expandable_list_item_2,
-                new String[] {LIST_NAME, LIST_UUID},
-                new int[] { android.R.id.text1, android.R.id.text2 }
+                new String[]{LIST_NAME, LIST_UUID},
+                new int[]{android.R.id.text1, android.R.id.text2}
         );
         mGattServicesList.setAdapter(gattServiceAdapter);
+        }
     }
 
     private static IntentFilter makeGattUpdateIntentFilter() {

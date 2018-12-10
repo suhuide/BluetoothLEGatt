@@ -292,6 +292,10 @@
         "source": "C:\\Users\\ersu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\8f053ff5885e7eeaa55bd38c49b95583\\res\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
+        "merged": "C:\\android\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\layout_sensor_items.xml.flat",
+        "source": "C:\\android\\BluetoothLeGatt\\Application\\src\\main\\res\\layout\\sensor_items.xml"
+    },
+    {
         "merged": "C:\\android\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
         "source": "C:\\Users\\ersu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\8f053ff5885e7eeaa55bd38c49b95583\\res\\drawable-hdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
     },
@@ -662,10 +666,6 @@
     {
         "merged": "C:\\android\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\layout-v21_notification_template_custom_big.xml.flat",
         "source": "C:\\Users\\ersu\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.2.aar\\e57d770e130ec2b9628d7114d33f8974\\res\\layout-v21\\notification_template_custom_big.xml"
-    },
-    {
-        "merged": "C:\\android\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\layout_dmp_device.xml.flat",
-        "source": "C:\\android\\BluetoothLeGatt\\Application\\src\\main\\res\\layout\\dmp_device.xml"
     },
     {
         "merged": "C:\\android\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_notification_bg_normal.9.png.flat",
@@ -1506,6 +1506,10 @@
     {
         "merged": "C:\\android\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\layout_abc_screen_content_include.xml.flat",
         "source": "C:\\Users\\ersu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\8f053ff5885e7eeaa55bd38c49b95583\\res\\layout\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "C:\\android\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\layout_device_list.xml.flat",
+        "source": "C:\\android\\BluetoothLeGatt\\Application\\src\\main\\res\\layout\\device_list.xml"
     },
     {
         "merged": "C:\\android\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",

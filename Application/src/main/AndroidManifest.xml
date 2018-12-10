@@ -45,16 +45,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".DMPActivity"
-            android:label="DMPActivity">
-            <intent-filter>
-                <action android:name="DMPActivity"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-
-            </intent-filter>
-        </activity>
-
         <activity android:name=".DeviceControlActivity"/>
         <service android:name=".BluetoothLeService" android:enabled="true"/>
     </application>

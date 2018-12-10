@@ -682,7 +682,6 @@ id beginning
 id blocking
 id bottom
 id buttonPanel
-id button_brower
 id button_dmp
 id button_n
 id button_r
@@ -786,6 +785,8 @@ id tabMode
 id tag_transition_group
 id text
 id text2
+id textChild
+id textGroup
 id textSpacerNoButtons
 id textSpacerNoTitle
 id time
@@ -832,7 +833,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout actionbar_indeterminate_progress
-layout dmp_device
+layout device_list
 layout gatt_services_characteristics
 layout listitem_device
 layout notification_action
@@ -853,6 +854,7 @@ layout notification_template_part_time
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout sensor_items
 layout support_simple_spinner_dropdown_item
 layout tooltip
 menu gatt_services
@@ -888,7 +890,6 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string app_name
 string ble_not_supported
-string brower
 string connected
 string disconnected
 string dmp
