@@ -1,0 +1,7 @@
+---- EXTRAS_DEVICE_NAME Matches (7 in 3 files) ----
+DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):    public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
+DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
+DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):            intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, "EXTRAS_DEVICE_NAME");
+DeviceScanActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):        intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, device.getName());
+DMPActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):    public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
+DMPActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);

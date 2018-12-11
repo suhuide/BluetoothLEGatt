@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * For a given BLE device, this Activity provides the user interface to connect, display data,
@@ -54,7 +56,8 @@ public class DeviceControlActivity extends Activity {
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
 
-    private byte[] cmd = {0x10};
+    private byte[] cmd = {(byte)0x10};
+    private byte[][] deviceList = new byte[8][9];
     private Button mButton_r;
     private Button mButton_w;
     private Button mButton_n;
@@ -133,11 +136,7 @@ public class DeviceControlActivity extends Activity {
                 @Override
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
                                             int childPosition, long id) {
-                    if(true) {
-                        if (sensor_items != null) {
-                            sensor_items.get(childPosition);
-                        }
-                    }else{
+                    /*
                     if (mGattCharacteristics != null) {
                         final BluetoothGattCharacteristic characteristic =
                                 mGattCharacteristics.get(groupPosition).get(childPosition);
@@ -160,8 +159,83 @@ public class DeviceControlActivity extends Activity {
                         }
                         return true;
                     }
-                    }
+                    */
                     return false;
+                }
+
+    };
+
+    Timer timer = new Timer();
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            timer.cancel();
+            
+            Toast myToast = Toast.makeText(DeviceControlActivity.this, "TimerTask read",Toast.LENGTH_LONG);
+            myToast.show() ;
+            if (mGattCharacteristics != null) {
+                final BluetoothGattCharacteristic characteristic =
+                        mGattCharacteristics.get(3).get(0);
+                final int charaProp = characteristic.getProperties();
+                if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
+                    // If there is an active notification on a characteristic, clear
+                    // it first so it doesn't update the data field on the user interface.
+                    if (mNotifyCharacteristic != null) {
+                        mBluetoothLeService.setCharacteristicNotification(
+                                mNotifyCharacteristic, false);
+                        mNotifyCharacteristic = null;
+                    }
+
+                    mBluetoothLeService.readCharacteristic(characteristic);
+                }
+                if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                    mNotifyCharacteristic = characteristic;
+                    mBluetoothLeService.setCharacteristicNotification(
+                            characteristic, true);
+                }
+            }
+        }
+    };
+
+    private final ExpandableListView.OnGroupClickListener deviceListClickListner =
+            new ExpandableListView.OnGroupClickListener() {
+                @Override
+                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id){
+
+                byte[][] d_list = {
+                        {(byte)0x00,(byte)0x8A,(byte)0x7F,(byte)0x7B,(byte)0xFE,(byte)0xFF,(byte)0x9F,(byte)0xFD,(byte)0x90},
+                        {(byte)0x00,(byte)0x50,(byte)0x81,(byte)0x7B,(byte)0xFE,(byte)0xFF,(byte)0x9F,(byte)0xFD,(byte)0x90},
+                        {(byte)0x00,(byte)0xC2,(byte)0x53,(byte)0xBE,(byte)0xFE,(byte)0xFF,(byte)0x57,(byte)0x0B,(byte)0x00},
+                };
+
+                if (mGattCharacteristics != null) {
+                    final BluetoothGattCharacteristic characteristic =
+                            mGattCharacteristics.get(3).get(0);
+                    final int charaProp = characteristic.getProperties();
+                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
+                        // If there is an active notification on a characteristic, clear
+                        // it first so it doesn't update the data field on the user interface.
+                        if (mNotifyCharacteristic != null) {
+                            mBluetoothLeService.setCharacteristicNotification(
+                                    mNotifyCharacteristic, false);
+                            mNotifyCharacteristic = null;
+                        }
+                        Toast myToast = Toast.makeText(DeviceControlActivity.this, "groupPosition",Toast.LENGTH_LONG);
+                        myToast.show() ;
+                        byte[] dataByte = mBluetoothLeService.getCharacteristicData();
+                        System.arraycopy(d_list[groupPosition], 0, dataByte, 0, d_list[groupPosition].length);
+                        dataByte[9] = 0x10;
+                        mBluetoothLeService.writeCharacteristic(characteristic,dataByte);
+                        timer.schedule(task,1000,1);
+                    }
+                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                        mNotifyCharacteristic = characteristic;
+                        mBluetoothLeService.setCharacteristicNotification(
+                                characteristic, true);
+                    }
+                    //return true;
+                }
+                return false;
                 }
 
     };
@@ -184,6 +258,7 @@ public class DeviceControlActivity extends Activity {
         ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
         mGattServicesList = (ExpandableListView) findViewById(R.id.gatt_services_list);
         mGattServicesList.setOnChildClickListener(servicesListClickListner);
+        mGattServicesList.setOnGroupClickListener(deviceListClickListner);
         mConnectionState = (TextView) findViewById(R.id.connection_state);
         mDataField = (TextView) findViewById(R.id.data_value);
         mButton_r = (Button) findViewById(R.id.button_r);
