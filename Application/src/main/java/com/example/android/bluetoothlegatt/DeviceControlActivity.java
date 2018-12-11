@@ -166,6 +166,7 @@ public class DeviceControlActivity extends Activity {
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+		   displayDeviceData(mBluetoothLeService.getCharacteristicData());
             }
         }
     };
@@ -206,6 +207,8 @@ public class DeviceControlActivity extends Activity {
                             break;
                     }
                     mBluetoothLeService.writeCharacteristic(characteristic, cmd);
+                    characteristicHandler.removeCallbacks(runnableWrite);
+                    characteristicHandler.removeCallbacks(runnableRead);
                     characteristicHandler.postDelayed(runnableRead, 100);
                 }
                 if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
@@ -214,9 +217,6 @@ public class DeviceControlActivity extends Activity {
                             characteristic, true);
                 }
             }
-            //characteristicHandler.postDelayed(this,1000);
-            //characteristicHandler.postDelayed(runnableRead,1000); // start Timer
-            //characteristicHandler.removeCallbacks(runnableRead); //stop Timer
         }
     };
 	
@@ -239,6 +239,8 @@ public class DeviceControlActivity extends Activity {
 
                     mBluetoothLeService.readCharacteristic(characteristic);
                     cmd[9]++;
+                    characteristicHandler.removeCallbacks(runnableWrite);
+                    characteristicHandler.removeCallbacks(runnableRead);
                     characteristicHandler.postDelayed(runnableWrite, 100);
                 }
                 if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
@@ -247,9 +249,6 @@ public class DeviceControlActivity extends Activity {
                             characteristic, true);
                 }
             }
-            //characteristicHandler.postDelayed(this,1000);
-            //characteristicHandler.postDelayed(runnable,1000); // start Timer
-            //characteristicHandler.removeCallbacks(runnable); //stop Timer
         }
     };
  
@@ -286,6 +285,8 @@ public class DeviceControlActivity extends Activity {
                                 //cmd = mBluetoothLeService.getCharacteristicData();
                                 System.arraycopy(d_list[groupPosition], 0, cmd, 0, d_list[groupPosition].length);
                                 cmd[9] = M_SENSOR_TEMPERATURE;
+                                characteristicHandler.removeCallbacks(runnableWrite);
+                                characteristicHandler.removeCallbacks(runnableRead);
                                 characteristicHandler.postDelayed(runnableWrite, 10);
                             }
                             if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
@@ -428,7 +429,7 @@ public class DeviceControlActivity extends Activity {
             myToast.show() ;
             if(true) {
                 //Create Menu
-                String[] names = {"12345678", "abcdefgh", "wxyz4321"};
+                String[] names = {"00 8A 7F 7B FE FF 9F FD 90", "00 50 81 7B FE FF 9F FD 90", "00 C2 53 BE FE FF 57 0B 00"};
                 //Create subMenu
                 String[] child_names = {"Temperatrue: 32 'C", "Humidity: 50%", "Pressure:343", "Amblight:453", "UV index: 2", "Mic: ", "IAQ Tvoc:3445", "IAQ eco2:222","Hall status: Open","Hall value:1234"};
                 device_list.clear();
@@ -539,6 +540,97 @@ public class DeviceControlActivity extends Activity {
                 mConnectionState.setText(resourceId);
             }
         });
+    }
+
+	public static byte[] float2byte(float f) 
+	{
+	    int fbit = Float.floatToIntBits(f);  
+	      
+	    byte[] b = new byte[4];    
+	    for (int i = 0; i < 4; i++) {    
+	        b[i] = (byte) (fbit >> (24 - i * 8));    
+	    }
+	    int len = b.length;
+	    byte[] dest = new byte[len];
+	    System.arraycopy(b, 0, dest, 0, len);
+	    byte temp;
+	    for (int i = 0; i < len / 2; ++i) {
+	        temp = dest[i];  
+	        dest[i] = dest[len - i - 1];  
+	        dest[len - i - 1] = temp;  
+	    }
+	    return dest;
+	}
+
+	public static float byte2float(byte[] b, int index) {    
+	    int l;                                             
+	    l = b[index + 0];                                  
+	    l &= 0xff;                                         
+	    l |= ((long) b[index + 1] << 8);                   
+	    l &= 0xffff;                                       
+	    l |= ((long) b[index + 2] << 16);                  
+	    l &= 0xffffff;                                     
+	    l |= ((long) b[index + 3] << 24);                  
+	    return Float.intBitsToFloat(l);                    
+	}
+
+    private void displayDeviceData(byte[] data) {
+    	if (data == null)
+			return;
+		if(data[9] > D_packetErrorInfo)
+			return;
+        byte[] aaa = new byte[4];
+		int temperature = 25000;
+        //unsigned int humidity;
+		float pressure;
+		//unsigned int ambLight;
+		//unsigned char uvIndex;
+		float mic;
+		short eco2;
+		short tvoc;
+        //unsigned char hallState;
+		float hallMagneticField;
+
+            //Create Menu
+            String[] names = {"00 8A 7F 7B FE FF 9F FD 90", "00 50 81 7B FE FF 9F FD 90", "00 C2 53 BE FE FF 57 0B 00"};
+            //Create subMenu
+            String[] child_names = {"Temperatrue: 32 'C", "Humidity: 50%", "Pressure:343", "Amblight:453", "UV index: 2", "Mic: ", "IAQ Tvoc:3445", "IAQ eco2:222","Hall status: Open","Hall value:1234"};
+		switch(data[9]){
+			case D_packetTemperature:
+                temperature = mBluetoothLeService.byte4ToInt(data,10);
+                child_names[0] = "Temperatrue:" + Float.toString((float) temperature / 1000.0f);//Integer.toString(temperature);//
+			    break;
+			case D_packetHumidity:
+                System.arraycopy(data, 10, aaa, 0, 4);
+			    break;
+			case D_packetPressure:break;
+			case D_packetAmbLight:break;
+			case D_packetUVIndex:break;
+			case D_packetMic:break;
+			case D_packetECO2:break;
+			case D_packetTVOC:break;
+			case D_packetHallState:break;
+			case D_packetHallMagneticField:break;
+			case D_packetLinkInfo:break;
+			case D_packetErrorInfo:break;
+
+		}
+
+		device_list.clear();
+            sensor_items.clear();
+            for (int i = 0; i < names.length; i++) {
+                Map<String, String> namedata = new HashMap<String, String>();
+                namedata.put("names", names[i]);
+                device_list.add(namedata);
+
+                List<Map<String, String>> child_map = new ArrayList<Map<String, String>>();
+                for (int j = 0; j < child_names.length; j++) {
+                    Map<String, String> mapcs = new HashMap<String, String>();
+                    mapcs.put("child_names", child_names[j]);
+                    child_map.add(mapcs);
+                }
+                sensor_items.add(child_map);
+            }
     }
 
     private void displayData(String data) {

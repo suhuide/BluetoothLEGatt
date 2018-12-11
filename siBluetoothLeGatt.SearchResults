@@ -1,3 +1,11 @@
----- runnable Matches (2 in 1 files) ----
-DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):    private Runnable runnable = new Runnable( ) {
-DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):                                characteristicHandler.postDelayed(runnable, 100);
+---- characteristicHandler Matches (10 in 1 files) ----
+DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):    private Handler characteristicHandler = new Handler( );
+DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):                    characteristicHandler.postDelayed(runnableRead, 100);
+DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):                    characteristicHandler.postDelayed(runnableWrite, 100);
+DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):                                characteristicHandler.postDelayed(runnableWrite, 10);
+DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):		characteristicHandler.removeCallbacks(runnableWrite); 
+DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):		characteristicHandler.removeCallbacks(runnableRead); 
+DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):        characteristicHandler.removeCallbacks(runnableWrite);
+DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):        characteristicHandler.removeCallbacks(runnableRead);
+DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):        characteristicHandler.removeCallbacks(runnableWrite);
+DeviceControlActivity.java (application\src\main\java\com\example\android\bluetoothlegatt):        characteristicHandler.removeCallbacks(runnableRead);

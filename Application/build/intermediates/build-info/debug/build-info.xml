@@ -5,28 +5,31 @@
     build-mode="COLD"
     density="360dpi"
     format="10"
-    ir-eligibility="COMPATIBLE"
+    ir-eligibility="METHOD_DELETED"
     plugin-version="3.2.0"
-    timestamp="1544517517372"
+    timestamp="1544527261622"
     token="-5689846282402703263"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="1738" />
+        duration="1438" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="28" />
+        duration="18" />
     <task
         name="verifier"
-        duration="23" />
+        duration="9" />
 
     <artifact
         location="C:\android\BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_6.apk"
         type="SPLIT" />
+    <artifact
+        location="C:\android\BluetoothLeGatt\Application\build\intermediates\instant-run-apk\debug\Application-debug.apk"
+        type="SPLIT_MAIN" />
 
     <build
         build-mode="FULL"
@@ -71,12 +74,15 @@
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="COMPATIBLE"
-        timestamp="1544517517372"
+        ir-eligibility="METHOD_DELETED"
+        timestamp="1544527261622"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="C:\android\BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_6.apk"
             type="SPLIT" />
+        <artifact
+            location="C:\android\BluetoothLeGatt\Application\build\intermediates\instant-run-apk\debug\Application-debug.apk"
+            type="SPLIT_MAIN" />
     </build>
 
 </instant-run>
