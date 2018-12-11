@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
@@ -41,8 +42,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * For a given BLE device, this Activity provides the user interface to connect, display data,
@@ -127,51 +126,10 @@ public class DeviceControlActivity extends Activity {
         }
     };
 
-    // If a given GATT characteristic is selected, check for supported features.  This sample
-    // demonstrates 'Read' and 'Notify' features.  See
-    // http://d.android.com/reference/android/bluetooth/BluetoothGatt.html for the complete
-    // list of supported characteristic features.
-    private final ExpandableListView.OnChildClickListener servicesListClickListner =
-            new ExpandableListView.OnChildClickListener() {
-                @Override
-                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
-                                            int childPosition, long id) {
-                    /*
-                    if (mGattCharacteristics != null) {
-                        final BluetoothGattCharacteristic characteristic =
-                                mGattCharacteristics.get(groupPosition).get(childPosition);
-                        final int charaProp = characteristic.getProperties();
-                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
-                            // If there is an active notification on a characteristic, clear
-                            // it first so it doesn't update the data field on the user interface.
-                            if (mNotifyCharacteristic != null) {
-                                mBluetoothLeService.setCharacteristicNotification(
-                                        mNotifyCharacteristic, false);
-                                mNotifyCharacteristic = null;
-                            }
-
-                            mBluetoothLeService.readCharacteristic(characteristic);
-                        }
-                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
-                            mNotifyCharacteristic = characteristic;
-                            mBluetoothLeService.setCharacteristicNotification(
-                                    characteristic, true);
-                        }
-                        return true;
-                    }
-                    */
-                    return false;
-                }
-
-    };
-
-    Timer timer = new Timer();
-    TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-            timer.cancel();
-            
-            Toast myToast = Toast.makeText(DeviceControlActivity.this, "TimerTask read",Toast.LENGTH_LONG);
+    private Handler handler = new Handler( );
+    private Runnable runnable = new Runnable( ) {
+        public void run ( ) {
+            Toast myToast = Toast.makeText(DeviceControlActivity.this, "Handler read",Toast.LENGTH_LONG);
             myToast.show() ;
             if (mGattCharacteristics != null) {
                 final BluetoothGattCharacteristic characteristic =
@@ -194,51 +152,84 @@ public class DeviceControlActivity extends Activity {
                             characteristic, true);
                 }
             }
+            //handler.postDelayed(this,1000);
+            //handler.postDelayed(runnable,1000); // start Timer
+            //handler.removeCallbacks(runnable); //stop Timer
         }
     };
 
-    private final ExpandableListView.OnGroupClickListener deviceListClickListner =
-            new ExpandableListView.OnGroupClickListener() {
+    // If a given GATT characteristic is selected, check for supported features.  This sample
+    // demonstrates 'Read' and 'Notify' features.  See
+    // http://d.android.com/reference/android/bluetooth/BluetoothGatt.html for the complete
+    // list of supported characteristic features.
+    private final ExpandableListView.OnChildClickListener servicesListClickListner =
+            new ExpandableListView.OnChildClickListener() {
                 @Override
-                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id){
+                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
+                                            int childPosition, long id) {
+                    if(true) {
+                        byte[][] d_list = {
+                                {(byte)0x00,(byte)0x8A,(byte)0x7F,(byte)0x7B,(byte)0xFE,(byte)0xFF,(byte)0x9F,(byte)0xFD,(byte)0x90},
+                                {(byte)0x00,(byte)0x50,(byte)0x81,(byte)0x7B,(byte)0xFE,(byte)0xFF,(byte)0x9F,(byte)0xFD,(byte)0x90},
+                                {(byte)0x00,(byte)0xC2,(byte)0x53,(byte)0xBE,(byte)0xFE,(byte)0xFF,(byte)0x57,(byte)0x0B,(byte)0x00},
+                        };
 
-                byte[][] d_list = {
-                        {(byte)0x00,(byte)0x8A,(byte)0x7F,(byte)0x7B,(byte)0xFE,(byte)0xFF,(byte)0x9F,(byte)0xFD,(byte)0x90},
-                        {(byte)0x00,(byte)0x50,(byte)0x81,(byte)0x7B,(byte)0xFE,(byte)0xFF,(byte)0x9F,(byte)0xFD,(byte)0x90},
-                        {(byte)0x00,(byte)0xC2,(byte)0x53,(byte)0xBE,(byte)0xFE,(byte)0xFF,(byte)0x57,(byte)0x0B,(byte)0x00},
-                };
-
-                if (mGattCharacteristics != null) {
-                    final BluetoothGattCharacteristic characteristic =
-                            mGattCharacteristics.get(3).get(0);
-                    final int charaProp = characteristic.getProperties();
-                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
-                        // If there is an active notification on a characteristic, clear
-                        // it first so it doesn't update the data field on the user interface.
-                        if (mNotifyCharacteristic != null) {
-                            mBluetoothLeService.setCharacteristicNotification(
-                                    mNotifyCharacteristic, false);
-                            mNotifyCharacteristic = null;
+                        if (mGattCharacteristics != null) {
+                            final BluetoothGattCharacteristic characteristic =
+                                    mGattCharacteristics.get(3).get(0);
+                            final int charaProp = characteristic.getProperties();
+                            if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
+                                // If there is an active notification on a characteristic, clear
+                                // it first so it doesn't update the data field on the user interface.
+                                if (mNotifyCharacteristic != null) {
+                                    mBluetoothLeService.setCharacteristicNotification(
+                                            mNotifyCharacteristic, false);
+                                    mNotifyCharacteristic = null;
+                                }
+                                Toast myToast = Toast.makeText(DeviceControlActivity.this, "groupPosition", Toast.LENGTH_LONG);
+                                myToast.show();
+                                byte[] dataByte = mBluetoothLeService.getCharacteristicData();
+                                System.arraycopy(d_list[groupPosition], 0, dataByte, 0, d_list[groupPosition].length);
+                                dataByte[9] = 0x10;
+                                mBluetoothLeService.writeCharacteristic(characteristic, dataByte);
+                                //timer.schedule(task,100);
+                                handler.postDelayed(runnable, 100);
+                            }
+                            if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                                mNotifyCharacteristic = characteristic;
+                                mBluetoothLeService.setCharacteristicNotification(
+                                        characteristic, true);
+                            }
                         }
-                        Toast myToast = Toast.makeText(DeviceControlActivity.this, "groupPosition",Toast.LENGTH_LONG);
-                        myToast.show() ;
-                        byte[] dataByte = mBluetoothLeService.getCharacteristicData();
-                        System.arraycopy(d_list[groupPosition], 0, dataByte, 0, d_list[groupPosition].length);
-                        dataByte[9] = 0x10;
-                        mBluetoothLeService.writeCharacteristic(characteristic,dataByte);
-                        timer.schedule(task,1000,1);
+                    }else {
+                        if (mGattCharacteristics != null) {
+                            final BluetoothGattCharacteristic characteristic =
+                                    mGattCharacteristics.get(groupPosition).get(childPosition);
+                            final int charaProp = characteristic.getProperties();
+                            if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
+                                // If there is an active notification on a characteristic, clear
+                                // it first so it doesn't update the data field on the user interface.
+                                if (mNotifyCharacteristic != null) {
+                                    mBluetoothLeService.setCharacteristicNotification(
+                                            mNotifyCharacteristic, false);
+                                    mNotifyCharacteristic = null;
+                                }
+
+                                mBluetoothLeService.readCharacteristic(characteristic);
+                            }
+                            if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                                mNotifyCharacteristic = characteristic;
+                                mBluetoothLeService.setCharacteristicNotification(
+                                        characteristic, true);
+                            }
+                            return true;
+                        }
                     }
-                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
-                        mNotifyCharacteristic = characteristic;
-                        mBluetoothLeService.setCharacteristicNotification(
-                                characteristic, true);
-                    }
-                    //return true;
-                }
-                return false;
+                    return false;
                 }
 
     };
+
 
     private void clearUI() {
         mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
@@ -258,7 +249,6 @@ public class DeviceControlActivity extends Activity {
         ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
         mGattServicesList = (ExpandableListView) findViewById(R.id.gatt_services_list);
         mGattServicesList.setOnChildClickListener(servicesListClickListner);
-        mGattServicesList.setOnGroupClickListener(deviceListClickListner);
         mConnectionState = (TextView) findViewById(R.id.connection_state);
         mDataField = (TextView) findViewById(R.id.data_value);
         mButton_r = (Button) findViewById(R.id.button_r);
