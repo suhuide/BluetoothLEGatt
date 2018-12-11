@@ -21,7 +21,25 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/DeviceControlActivity$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/DeviceControlActivity$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/DeviceControlActivity$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/DeviceControlActivity$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/DeviceControlActivity$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/DeviceControlActivity$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/DeviceControlActivity$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/DeviceControlActivity$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/DeviceControlActivity$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental-verifier/debug/com/example/android/bluetoothlegatt/DeviceControlActivity$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/23/com/example/android/bluetoothlegatt/DeviceControlActivity$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/23/com/example/android/bluetoothlegatt/DeviceControlActivity$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/23/com/example/android/bluetoothlegatt/DeviceControlActivity$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/23/com/example/android/bluetoothlegatt/DeviceControlActivity$2.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/23/com/example/android/bluetoothlegatt/DeviceControlActivity$3.dex" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/23/com/example/android/bluetoothlegatt/DeviceControlActivity$3.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/23/com/example/android/bluetoothlegatt/DeviceControlActivity$4.dex" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/23/com/example/android/bluetoothlegatt/DeviceControlActivity$4.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/23/com/example/android/bluetoothlegatt/DeviceControlActivity$5.dex" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/23/com/example/android/bluetoothlegatt/DeviceControlActivity$5.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/DeviceControlActivity$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/DeviceControlActivity$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/DeviceControlActivity$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/DeviceControlActivity$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/DeviceControlActivity$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/DeviceControlActivity$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/DeviceControlActivity$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/DeviceControlActivity$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/DeviceControlActivity$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/instantRun/debug/0/com/example/android/bluetoothlegatt/DeviceControlActivity$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/DeviceControlActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/DeviceControlActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siBluetoothLeGatt.PFI" beforeDir="false" afterPath="$PROJECT_DIR$/siBluetoothLeGatt.PFI" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siBluetoothLeGatt.PS" beforeDir="false" afterPath="$PROJECT_DIR$/siBluetoothLeGatt.PS" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siBluetoothLeGatt.SearchResults" beforeDir="false" afterPath="$PROJECT_DIR$/siBluetoothLeGatt.SearchResults" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,24 +65,45 @@
       <file leaf-file-name="DeviceControlActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/DeviceControlActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="250" column="76" selection-start-line="250" selection-start-column="76" selection-end-line="250" selection-end-column="76" />
+            <state relative-caret-position="167">
+              <caret line="329" column="46" selection-start-line="329" selection-start-column="46" selection-end-line="329" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5446#6986#0" expanded="true" />
-                <element signature="e#6985#6986#0" expanded="true" />
-                <element signature="e#7376#11699#0" expanded="true" />
-                <element signature="e#11698#11699#0" expanded="true" />
-                <element signature="e#16036#17485#0" expanded="true" />
-                <element signature="e#17484#17485#0" expanded="true" />
-                <element signature="e#17528#19253#0" expanded="true" />
-                <element signature="e#19252#19253#0" expanded="true" />
-                <element signature="e#19296#20719#0" expanded="true" />
-                <element signature="e#20718#20719#0" expanded="true" />
-                <element signature="e#20764#21793#0" expanded="true" />
-                <element signature="e#21792#21793#0" expanded="true" />
-                <element signature="e#23502#23650#0" expanded="true" />
-                <element signature="e#23649#23650#0" expanded="true" />
+                <element signature="e#4856#4896#0" expanded="true" />
+                <element signature="e#5152#5173#0" expanded="true" />
+                <element signature="e#5241#5268#0" expanded="true" />
+                <element signature="e#6508#7596#0" expanded="true" />
+                <element signature="e#6818#6836#0" expanded="true" />
+                <element signature="e#7039#7060#0" expanded="true" />
+                <element signature="e#7595#7596#0" expanded="true" />
+                <element signature="e#7696#10163#0" expanded="true" />
+                <element signature="e#10162#10163#0" expanded="true" />
+                <element signature="e#10203#11890#0" expanded="true" />
+                <element signature="e#11889#11890#0" expanded="true" />
+                <element signature="e#12282#16464#0" expanded="true" />
+                <element signature="e#16463#16464#0" expanded="true" />
+                <element signature="e#16598#16614#0" expanded="true" />
+                <element signature="e#18145#19594#0" expanded="true" />
+                <element signature="e#19593#19594#0" expanded="true" />
+                <element signature="e#19637#21285#0" expanded="true" />
+                <element signature="e#21284#21285#0" expanded="true" />
+                <element signature="e#21328#22751#0" expanded="true" />
+                <element signature="e#22154#22170#0" expanded="true" />
+                <element signature="e#22346#22367#0" expanded="true" />
+                <element signature="e#22501#22517#0" expanded="true" />
+                <element signature="e#22750#22751#0" expanded="true" />
+                <element signature="e#22796#23825#0" expanded="true" />
+                <element signature="e#23824#23825#0" expanded="true" />
+                <element signature="e#25534#25682#0" expanded="true" />
+                <element signature="e#25681#25682#0" expanded="true" />
+                <element signature="e#26207#26257#0" expanded="true" />
+                <element signature="e#26295#26352#0" expanded="true" />
+                <element signature="e#26428#26453#0" expanded="true" />
+                <element signature="e#26565#26601#0" expanded="true" />
+                <element signature="e#26876#26892#0" expanded="true" />
+                <element signature="e#27291#27316#0" expanded="true" />
+                <element signature="e#27535#27564#0" expanded="true" />
+                <element signature="e#27832#27848#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2487,20 +2526,41 @@
           <caret line="244" column="13" selection-start-line="244" selection-start-column="13" selection-end-line="244" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5446#6986#0" expanded="true" />
-            <element signature="e#6985#6986#0" expanded="true" />
-            <element signature="e#7376#11699#0" expanded="true" />
-            <element signature="e#11698#11699#0" expanded="true" />
-            <element signature="e#16036#17485#0" expanded="true" />
-            <element signature="e#17484#17485#0" expanded="true" />
-            <element signature="e#17528#19253#0" expanded="true" />
-            <element signature="e#19252#19253#0" expanded="true" />
-            <element signature="e#19296#20719#0" expanded="true" />
-            <element signature="e#20718#20719#0" expanded="true" />
-            <element signature="e#20764#21793#0" expanded="true" />
-            <element signature="e#21792#21793#0" expanded="true" />
-            <element signature="e#23502#23650#0" expanded="true" />
-            <element signature="e#23649#23650#0" expanded="true" />
+            <element signature="e#4856#4896#0" expanded="true" />
+            <element signature="e#5152#5173#0" expanded="true" />
+            <element signature="e#5241#5268#0" expanded="true" />
+            <element signature="e#6508#7596#0" expanded="true" />
+            <element signature="e#6818#6836#0" expanded="true" />
+            <element signature="e#7039#7060#0" expanded="true" />
+            <element signature="e#7595#7596#0" expanded="true" />
+            <element signature="e#7696#10163#0" expanded="true" />
+            <element signature="e#10162#10163#0" expanded="true" />
+            <element signature="e#10203#11890#0" expanded="true" />
+            <element signature="e#11889#11890#0" expanded="true" />
+            <element signature="e#12282#16464#0" expanded="true" />
+            <element signature="e#16463#16464#0" expanded="true" />
+            <element signature="e#16598#16614#0" expanded="true" />
+            <element signature="e#18145#19594#0" expanded="true" />
+            <element signature="e#19593#19594#0" expanded="true" />
+            <element signature="e#19637#21285#0" expanded="true" />
+            <element signature="e#21284#21285#0" expanded="true" />
+            <element signature="e#21328#22751#0" expanded="true" />
+            <element signature="e#22154#22170#0" expanded="true" />
+            <element signature="e#22346#22367#0" expanded="true" />
+            <element signature="e#22501#22517#0" expanded="true" />
+            <element signature="e#22750#22751#0" expanded="true" />
+            <element signature="e#22796#23825#0" expanded="true" />
+            <element signature="e#23824#23825#0" expanded="true" />
+            <element signature="e#25534#25682#0" expanded="true" />
+            <element signature="e#25681#25682#0" expanded="true" />
+            <element signature="e#26207#26257#0" expanded="true" />
+            <element signature="e#26295#26352#0" expanded="true" />
+            <element signature="e#26428#26453#0" expanded="true" />
+            <element signature="e#26565#26601#0" expanded="true" />
+            <element signature="e#26876#26892#0" expanded="true" />
+            <element signature="e#27291#27316#0" expanded="true" />
+            <element signature="e#27535#27564#0" expanded="true" />
+            <element signature="e#27832#27848#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2556,20 +2616,41 @@
           <caret line="155" column="16" selection-start-line="155" selection-start-column="16" selection-end-line="155" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5446#6986#0" expanded="true" />
-            <element signature="e#6985#6986#0" expanded="true" />
-            <element signature="e#7376#11699#0" expanded="true" />
-            <element signature="e#11698#11699#0" expanded="true" />
-            <element signature="e#16036#17485#0" expanded="true" />
-            <element signature="e#17484#17485#0" expanded="true" />
-            <element signature="e#17528#19253#0" expanded="true" />
-            <element signature="e#19252#19253#0" expanded="true" />
-            <element signature="e#19296#20719#0" expanded="true" />
-            <element signature="e#20718#20719#0" expanded="true" />
-            <element signature="e#20764#21793#0" expanded="true" />
-            <element signature="e#21792#21793#0" expanded="true" />
-            <element signature="e#23502#23650#0" expanded="true" />
-            <element signature="e#23649#23650#0" expanded="true" />
+            <element signature="e#4856#4896#0" expanded="true" />
+            <element signature="e#5152#5173#0" expanded="true" />
+            <element signature="e#5241#5268#0" expanded="true" />
+            <element signature="e#6508#7596#0" expanded="true" />
+            <element signature="e#6818#6836#0" expanded="true" />
+            <element signature="e#7039#7060#0" expanded="true" />
+            <element signature="e#7595#7596#0" expanded="true" />
+            <element signature="e#7696#10163#0" expanded="true" />
+            <element signature="e#10162#10163#0" expanded="true" />
+            <element signature="e#10203#11890#0" expanded="true" />
+            <element signature="e#11889#11890#0" expanded="true" />
+            <element signature="e#12282#16464#0" expanded="true" />
+            <element signature="e#16463#16464#0" expanded="true" />
+            <element signature="e#16598#16614#0" expanded="true" />
+            <element signature="e#18145#19594#0" expanded="true" />
+            <element signature="e#19593#19594#0" expanded="true" />
+            <element signature="e#19637#21285#0" expanded="true" />
+            <element signature="e#21284#21285#0" expanded="true" />
+            <element signature="e#21328#22751#0" expanded="true" />
+            <element signature="e#22154#22170#0" expanded="true" />
+            <element signature="e#22346#22367#0" expanded="true" />
+            <element signature="e#22501#22517#0" expanded="true" />
+            <element signature="e#22750#22751#0" expanded="true" />
+            <element signature="e#22796#23825#0" expanded="true" />
+            <element signature="e#23824#23825#0" expanded="true" />
+            <element signature="e#25534#25682#0" expanded="true" />
+            <element signature="e#25681#25682#0" expanded="true" />
+            <element signature="e#26207#26257#0" expanded="true" />
+            <element signature="e#26295#26352#0" expanded="true" />
+            <element signature="e#26428#26453#0" expanded="true" />
+            <element signature="e#26565#26601#0" expanded="true" />
+            <element signature="e#26876#26892#0" expanded="true" />
+            <element signature="e#27291#27316#0" expanded="true" />
+            <element signature="e#27535#27564#0" expanded="true" />
+            <element signature="e#27832#27848#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2812,24 +2893,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/bluetoothlegatt/DeviceControlActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="250" column="76" selection-start-line="250" selection-start-column="76" selection-end-line="250" selection-end-column="76" />
+        <state relative-caret-position="167">
+          <caret line="329" column="46" selection-start-line="329" selection-start-column="46" selection-end-line="329" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5446#6986#0" expanded="true" />
-            <element signature="e#6985#6986#0" expanded="true" />
-            <element signature="e#7376#11699#0" expanded="true" />
-            <element signature="e#11698#11699#0" expanded="true" />
-            <element signature="e#16036#17485#0" expanded="true" />
-            <element signature="e#17484#17485#0" expanded="true" />
-            <element signature="e#17528#19253#0" expanded="true" />
-            <element signature="e#19252#19253#0" expanded="true" />
-            <element signature="e#19296#20719#0" expanded="true" />
-            <element signature="e#20718#20719#0" expanded="true" />
-            <element signature="e#20764#21793#0" expanded="true" />
-            <element signature="e#21792#21793#0" expanded="true" />
-            <element signature="e#23502#23650#0" expanded="true" />
-            <element signature="e#23649#23650#0" expanded="true" />
+            <element signature="e#4856#4896#0" expanded="true" />
+            <element signature="e#5152#5173#0" expanded="true" />
+            <element signature="e#5241#5268#0" expanded="true" />
+            <element signature="e#6508#7596#0" expanded="true" />
+            <element signature="e#6818#6836#0" expanded="true" />
+            <element signature="e#7039#7060#0" expanded="true" />
+            <element signature="e#7595#7596#0" expanded="true" />
+            <element signature="e#7696#10163#0" expanded="true" />
+            <element signature="e#10162#10163#0" expanded="true" />
+            <element signature="e#10203#11890#0" expanded="true" />
+            <element signature="e#11889#11890#0" expanded="true" />
+            <element signature="e#12282#16464#0" expanded="true" />
+            <element signature="e#16463#16464#0" expanded="true" />
+            <element signature="e#16598#16614#0" expanded="true" />
+            <element signature="e#18145#19594#0" expanded="true" />
+            <element signature="e#19593#19594#0" expanded="true" />
+            <element signature="e#19637#21285#0" expanded="true" />
+            <element signature="e#21284#21285#0" expanded="true" />
+            <element signature="e#21328#22751#0" expanded="true" />
+            <element signature="e#22154#22170#0" expanded="true" />
+            <element signature="e#22346#22367#0" expanded="true" />
+            <element signature="e#22501#22517#0" expanded="true" />
+            <element signature="e#22750#22751#0" expanded="true" />
+            <element signature="e#22796#23825#0" expanded="true" />
+            <element signature="e#23824#23825#0" expanded="true" />
+            <element signature="e#25534#25682#0" expanded="true" />
+            <element signature="e#25681#25682#0" expanded="true" />
+            <element signature="e#26207#26257#0" expanded="true" />
+            <element signature="e#26295#26352#0" expanded="true" />
+            <element signature="e#26428#26453#0" expanded="true" />
+            <element signature="e#26565#26601#0" expanded="true" />
+            <element signature="e#26876#26892#0" expanded="true" />
+            <element signature="e#27291#27316#0" expanded="true" />
+            <element signature="e#27535#27564#0" expanded="true" />
+            <element signature="e#27832#27848#0" expanded="true" />
           </folding>
         </state>
       </provider>
