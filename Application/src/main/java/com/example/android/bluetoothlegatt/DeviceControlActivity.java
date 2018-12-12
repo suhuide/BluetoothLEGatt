@@ -101,6 +101,18 @@ public class DeviceControlActivity extends Activity {
     private byte[][] deviceList = new byte[8][9];
     private byte characteristicReadType;
     private byte characteristicReadRetry;
+
+    private int temperature = 25000;
+    private long humidity = 50000;
+    private float pressure = 0;
+    private long ambLight = 0;
+    private int uvIndex = 0;
+    private float mic = 0;
+    private short eco2 = 0;
+    private short tvoc = 0;
+    private boolean hallState;
+    private float hallMagneticField;
+
     private Button mButton_r;
     private Button mButton_w;
     private Button mButton_n;
@@ -166,7 +178,7 @@ public class DeviceControlActivity extends Activity {
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
-		   displayDeviceData(mBluetoothLeService.getCharacteristicData());
+		        displayDeviceData(mBluetoothLeService.getCharacteristicData());
             }
         }
     };
@@ -174,8 +186,8 @@ public class DeviceControlActivity extends Activity {
     private Handler characteristicHandler = new Handler( );
     private Runnable runnableWrite = new Runnable( ) {
         public void run ( ) {
-            Toast myToast = Toast.makeText(DeviceControlActivity.this, "Handler write",Toast.LENGTH_LONG);
-            myToast.show() ;
+            //Toast myToast = Toast.makeText(DeviceControlActivity.this, "Handler write",Toast.LENGTH_LONG);
+            //myToast.show() ;
             if (mGattCharacteristics != null) {
                 final BluetoothGattCharacteristic characteristic =
                         mGattCharacteristics.get(3).get(0);
@@ -203,6 +215,7 @@ public class DeviceControlActivity extends Activity {
                         //case M_APP_REQUEST_LINK_NODE:break;
                         //case M_APP_ERROR_INFO:break;
                         default:
+                            //return;
                             cmd[9] = M_SENSOR_TEMPERATURE;
                             break;
                     }
@@ -222,8 +235,8 @@ public class DeviceControlActivity extends Activity {
 	
     private Runnable runnableRead = new Runnable( ) {
         public void run ( ) {
-            Toast myToast = Toast.makeText(DeviceControlActivity.this, "Handler read",Toast.LENGTH_LONG);
-            myToast.show() ;
+            //Toast myToast = Toast.makeText(DeviceControlActivity.this, "Handler read",Toast.LENGTH_LONG);
+            //myToast.show() ;
             if (mGattCharacteristics != null) {
                 final BluetoothGattCharacteristic characteristic =
                         mGattCharacteristics.get(3).get(0);
@@ -542,95 +555,96 @@ public class DeviceControlActivity extends Activity {
         });
     }
 
-	public static byte[] float2byte(float f) 
-	{
-	    int fbit = Float.floatToIntBits(f);  
-	      
-	    byte[] b = new byte[4];    
-	    for (int i = 0; i < 4; i++) {    
-	        b[i] = (byte) (fbit >> (24 - i * 8));    
-	    }
-	    int len = b.length;
-	    byte[] dest = new byte[len];
-	    System.arraycopy(b, 0, dest, 0, len);
-	    byte temp;
-	    for (int i = 0; i < len / 2; ++i) {
-	        temp = dest[i];  
-	        dest[i] = dest[len - i - 1];  
-	        dest[len - i - 1] = temp;  
-	    }
-	    return dest;
-	}
-
-	public static float byte2float(byte[] b, int index) {    
-	    int l;                                             
-	    l = b[index + 0];                                  
-	    l &= 0xff;                                         
-	    l |= ((long) b[index + 1] << 8);                   
-	    l &= 0xffff;                                       
-	    l |= ((long) b[index + 2] << 16);                  
-	    l &= 0xffffff;                                     
-	    l |= ((long) b[index + 3] << 24);                  
-	    return Float.intBitsToFloat(l);                    
-	}
-
     private void displayDeviceData(byte[] data) {
     	if (data == null)
 			return;
 		if(data[9] > D_packetErrorInfo)
 			return;
-        byte[] aaa = new byte[4];
-		int temperature = 25000;
-        //unsigned int humidity;
-		float pressure;
-		//unsigned int ambLight;
-		//unsigned char uvIndex;
-		float mic;
-		short eco2;
-		short tvoc;
-        //unsigned char hallState;
-		float hallMagneticField;
 
             //Create Menu
             String[] names = {"00 8A 7F 7B FE FF 9F FD 90", "00 50 81 7B FE FF 9F FD 90", "00 C2 53 BE FE FF 57 0B 00"};
             //Create subMenu
-            String[] child_names = {"Temperatrue: 32 'C", "Humidity: 50%", "Pressure:343", "Amblight:453", "UV index: 2", "Mic: ", "IAQ Tvoc:3445", "IAQ eco2:222","Hall status: Open","Hall value:1234"};
+            String[] child_names = new String[10];
 		switch(data[9]){
 			case D_packetTemperature:
-                temperature = mBluetoothLeService.byte4ToInt(data,10);
-                child_names[0] = "Temperatrue:" + Float.toString((float) temperature / 1000.0f);//Integer.toString(temperature);//
+                temperature = mBluetoothLeService.byte2Int(data,10);
 			    break;
 			case D_packetHumidity:
-                System.arraycopy(data, 10, aaa, 0, 4);
+                humidity = mBluetoothLeService.getUnsignedIntt(mBluetoothLeService.byte2Int(data,10));
 			    break;
-			case D_packetPressure:break;
-			case D_packetAmbLight:break;
-			case D_packetUVIndex:break;
-			case D_packetMic:break;
-			case D_packetECO2:break;
-			case D_packetTVOC:break;
-			case D_packetHallState:break;
-			case D_packetHallMagneticField:break;
-			case D_packetLinkInfo:break;
-			case D_packetErrorInfo:break;
+			case D_packetPressure:
+                pressure = mBluetoothLeService.byte2float(data,10);
+			    break;
+			case D_packetAmbLight:
+                ambLight = mBluetoothLeService.getUnsignedIntt(mBluetoothLeService.byte2Int(data,10));
+			    break;
+			case D_packetUVIndex:
+                uvIndex = mBluetoothLeService.getUnsignedByte(data[10]);
+			    break;
+			case D_packetMic:
+			    mic = mBluetoothLeService.byte2float(data,10);
+			    break;
+			case D_packetECO2:
 
+			    break;
+			case D_packetTVOC:
+
+			    break;
+			case D_packetHallState:
+
+			    break;
+			case D_packetHallMagneticField:
+
+			    break;
+			case D_packetLinkInfo:
+			    break;
+			case D_packetErrorInfo:
+			    break;
 		}
 
-		device_list.clear();
-            sensor_items.clear();
-            for (int i = 0; i < names.length; i++) {
-                Map<String, String> namedata = new HashMap<String, String>();
-                namedata.put("names", names[i]);
-                device_list.add(namedata);
+        child_names[0] = "Temperatrue:" + Float.toString((float) temperature / 1000.0f) + "℃";
+        child_names[1] = "Humidity:" + Float.toString((float) humidity / 1000.0f) + "%";
+        child_names[2] = "Pressure:" + Float.toString(pressure);
+        child_names[3] = "AmbLight:" + Float.toString((float) ambLight / 100.0f);
+        child_names[4] = "UVIndex:" + Integer.toString(uvIndex);
+        child_names[5] = "Mic:" + Float.toString(mic) + "dB";
+        child_names[6] = "ECO2:";
+        child_names[7] = "TVOC:";
+        child_names[8] = "Hall state: ";
+        child_names[9] = "Hall value:";
 
-                List<Map<String, String>> child_map = new ArrayList<Map<String, String>>();
-                for (int j = 0; j < child_names.length; j++) {
-                    Map<String, String> mapcs = new HashMap<String, String>();
-                    mapcs.put("child_names", child_names[j]);
-                    child_map.add(mapcs);
-                }
-                sensor_items.add(child_map);
+		device_list.clear();
+        sensor_items.clear();
+        for (int i = 0; i < names.length; i++) {
+            Map<String, String> namedata = new HashMap<String, String>();
+            namedata.put("names", names[i]);
+            device_list.add(namedata);
+
+            List<Map<String, String>> child_map = new ArrayList<Map<String, String>>();
+            for (int j = 0; j < child_names.length; j++) {
+                Map<String, String> mapcs = new HashMap<String, String>();
+                mapcs.put("child_names", child_names[j]);
+                child_map.add(mapcs);
             }
+            sensor_items.add(child_map);
+        }
+
+        SimpleExpandableListAdapter sela = new SimpleExpandableListAdapter(
+                DeviceControlActivity.this,
+                device_list,
+                R.layout.device_list,
+                new String[]{"names"},
+                new int[]{R.id.textGroup},
+                sensor_items,
+                R.layout.sensor_items,
+                new String[]{"child_names"},
+                new int[]{R.id.textChild});
+        // Clear list
+        mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
+        // enqueue
+        mGattServicesList.setAdapter(sela);
+        mGattServicesList.expandGroup(2);
+
     }
 
     private void displayData(String data) {

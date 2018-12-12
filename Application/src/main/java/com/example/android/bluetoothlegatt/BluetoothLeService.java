@@ -340,7 +340,7 @@ public class BluetoothLeService extends Service {
         return characteristicData;
     }
 
-    public static String byteArrayToString(byte[] a) {
+    public static String byteArray2String(byte[] a) {
         if(a == null || a.length == 0)
             return null;
         final StringBuilder sb = new StringBuilder(a.length);
@@ -350,7 +350,46 @@ public class BluetoothLeService extends Service {
         return sb.toString();
     }
 
-    public static byte[] intToByte4(int i) {
+    public static byte[] float2byte(float f)
+    {
+        int fbit = Float.floatToIntBits(f);
+
+        byte[] b = new byte[4];
+        for (int i = 0; i < 4; i++) {
+            b[i] = (byte) (fbit >> (24 - i * 8));
+        }
+        int len = b.length;
+        byte[] dest = new byte[len];
+        System.arraycopy(b, 0, dest, 0, len);
+        byte temp;
+        for (int i = 0; i < len / 2; ++i) {
+            temp = dest[i];
+            dest[i] = dest[len - i - 1];
+            dest[len - i - 1] = temp;
+        }
+        return dest;
+    }
+
+    public static float byte2float(byte[] b, int offset) {
+        int l;
+        l = b[offset + 0];
+        l &= 0xff;
+        l |= ((long) b[offset + 1] << 8);
+        l &= 0xffff;
+        l |= ((long) b[offset + 2] << 16);
+        l &= 0xffffff;
+        l |= ((long) b[offset + 3] << 24);
+        return Float.intBitsToFloat(l);
+    }
+	
+    public static int byte2Int(byte[] bytes, int offset) {
+        int b0 = bytes[offset] & 0xFF;
+        int b1 = bytes[offset + 1] & 0xFF;
+        int b2 = bytes[offset + 2] & 0xFF;
+        int b3 = bytes[offset + 3] & 0xFF;
+        return (b3 << 24) | (b2 << 16) | (b1 << 8) | b0;
+    }
+    public static byte[] int2Byte4(int i) {
         byte[] targets = new byte[4];
         targets[3] = (byte) (i & 0xFF);
         targets[2] = (byte) (i >> 8 & 0xFF);
@@ -359,13 +398,7 @@ public class BluetoothLeService extends Service {
         return targets;
     }
 
-    /**
-     * long整数转换为8字节的byte数组
-     *
-     * @param lo  long整数
-     * @return byte数组
-     */
-    public static byte[] longToByte8(long lo) {
+    public static byte[] long2Byte8(long lo) {
         byte[] targets = new byte[8];
         for (int i = 0; i < 8; i++) {
             int offset = (targets.length - 1 - i) * 8;
@@ -374,60 +407,34 @@ public class BluetoothLeService extends Service {
         return targets;
     }
 
-    /**
-     * short整数转换为2字节的byte数组
-     *
-     * @param s   short整数
-     * @return byte数组
-     */
-    public static byte[] unsignedShortToByte2(int s) {
+    public static byte[] unsignedShort2Byte(int s) {
         byte[] targets = new byte[2];
         targets[0] = (byte) (s >> 8 & 0xFF);
         targets[1] = (byte) (s & 0xFF);
         return targets;
     }
 
-    /**
-     * byte数组转换为无符号short整数
-     *
-     * @param bytes   byte数组
-     * @return short整数
-     */
-    public static int byte2ToUnsignedShort(byte[] bytes) {
-        return byte2ToUnsignedShort(bytes, 0);
+    public static int byte2UnsignedShort(byte[] bytes) {
+        return byte2UnsignedShort(bytes, 0);
     }
 
-    /**
-     * byte数组转换为无符号short整数
-     *
-     * @param bytes
-     *            byte数组
-     * @param off
-     *            开始位置
-     * @return short整数
-     */
-    public static int byte2ToUnsignedShort(byte[] bytes, int off) {
-        int high = bytes[off];
-        int low = bytes[off + 1];
+    public static int byte2UnsignedShort(byte[] bytes, int offset) {
+        int high = bytes[offset];
+        int low = bytes[offset + 1];
         return (high << 8 & 0xFF00) | (low & 0xFF);
     }
 
-    /**
-     * byte数组转换为int整数
-     *
-     * @param bytes
-     *            byte数组
-     * @param off
-     *            开始位置
-     * @return int整数
-     */
-    public static int byte4ToInt(byte[] bytes, int off) {
-        int b0 = bytes[off] & 0xFF;
-        int b1 = bytes[off + 1] & 0xFF;
-        int b2 = bytes[off + 2] & 0xFF;
-        int b3 = bytes[off + 3] & 0xFF;
-        return (b0 << 24) | (b1 << 16) | (b2 << 8) | b3;
-    }
+	public int getUnsignedByte (byte data){ //byte data change to 0~255 (0xFF means BYTE)
+	    return data&0x0FF ;
+	}
+
+	public int getUnsignedByte (short data){ //data change to 0~65535 (0xFFFF means WORD)
+	    return data&0x0FFFF ;
+	}
+
+	public long getUnsignedIntt (int data){ //int change to 0~4294967295 (0xFFFFFFFF means DWORD)
+	    return data&0x0FFFFFFFF ;
+	}
 
     /**
      * Retrieves a list of supported GATT services on the connected device. This should be
