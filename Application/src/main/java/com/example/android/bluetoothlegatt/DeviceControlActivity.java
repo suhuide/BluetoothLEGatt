@@ -17,7 +17,6 @@
 package com.example.android.bluetoothlegatt;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
@@ -27,6 +26,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
@@ -41,6 +41,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * For a given BLE device, this Activity provides the user interface to connect, display data,
@@ -53,8 +54,71 @@ public class DeviceControlActivity extends Activity {
 
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
+    /*
+    public static final int D_Temperatrue   = (1 << 0);
+    public static final int D_Humidity      = (1 << 1);
+    public static final int D_Pressure      = (1 << 2);
+    public static final int D_Amblight      = (1 << 3);
+    public static final int D_UV_index      = (1 << 4);
+    public static final int D_Mic           = (1 << 5);
+    public static final int D_IAQ_Tvoc      = (1 << 6);
+    public static final int D_IAQ_eco2      = (1 << 7);
+    public static final int D_Hall_status   = (1 << 8);
+    public static final int D_Hall_value    = (1 << 9);
+    public static final int D_WMeter        = (1 << 10);
+    public static final int D_NONE          = 0;
+    public static final int D_ALL_SENSOR    = (D_Temperatrue|D_Humidity|D_Pressure|D_Amblight|D_UV_index|D_Mic|D_IAQ_Tvoc|D_IAQ_eco2|D_Hall_status|D_Hall_value);
+    */
+    public static final byte D_deviceMaxNone = 127;
+	
+    public static final byte D_packetTemperature = 0;
+    public static final byte D_packetHumidity = 1;
+    public static final byte D_packetPressure = 2;
+    public static final byte D_packetAmbLight = 3;
+    public static final byte D_packetUVIndex = 4;
+    public static final byte D_packetMic = 5;
+    public static final byte D_packetECO2 = 6;
+    public static final byte D_packetTVOC = 7;
+    public static final byte D_packetHallState = 8;
+    public static final byte D_packetHallMagneticField = 9;
+    public static final byte D_packetLinkInfo = 10;
+    public static final byte D_packetErrorInfo = 11;
 
-    private byte[] cmd = {0x10};
+    public static final byte M_SENSOR_TEMPERATURE = 16;
+    public static final byte M_SENSOR_HUMIDITY = 17;
+    public static final byte M_SENSOR_PRESSURE = 18;
+    public static final byte M_SENSOR_AMBLIGHT = 19;
+    public static final byte M_SENSOR_UVINDEX = 20;
+    public static final byte M_SENSOR_MIC = 21;
+    public static final byte M_SENSOR_ECO2 = 22;
+    public static final byte M_SENSOR_TVOC = 23;
+    public static final byte M_SENSOR_HALLSTATE = 24;
+    public static final byte M_SENSOR_HALLMAGNETICFIELD = 25;
+    public static final byte M_APP_REQUEST_LINK_NODE = 26;
+    public static final byte M_APP_ERROR_INFO = 27;
+
+    public static final int D_RetryTimeOut  = 3;
+
+    private byte[] cmd = new byte[16];
+    private byte[][] deviceList = new byte[8][10];
+    private byte deviceIndex = 0;
+    private byte deviceMax = D_deviceMaxNone;
+    private int deviceDataReadIndex = 0;
+    private byte characteristicReadRetry;
+
+    private int temperature = 25000;
+    private long humidity = 50000;
+    private float pressure = 0;
+    private long ambLight = 0;
+    private int uvIndex = 0;
+    private float mic = 0;
+    private short eco2 = 0;
+    private short tvoc = 0;
+    private boolean hallState;
+    private float hallMagneticField;
+    //Create Menu
+    private String[] names = new String[8];
+
     private Button mButton_r;
     private Button mButton_w;
     private Button mButton_n;
@@ -72,6 +136,9 @@ public class DeviceControlActivity extends Activity {
 
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
+
+    List<Map<String, String>> device_list = new ArrayList<Map<String, String>>();
+    List<List<Map<String, String>>> sensor_items = new ArrayList<List<Map<String, String>>>();
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -117,6 +184,101 @@ public class DeviceControlActivity extends Activity {
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+		        displayDeviceData(mBluetoothLeService.getCharacteristicData());
+            }
+        }
+    };
+
+    private Handler characteristicHandler = new Handler( );
+    private Runnable runnableWrite = new Runnable( ) {
+        public void run ( ) {
+            //Toast myToast = Toast.makeText(DeviceControlActivity.this, "Handler write",Toast.LENGTH_LONG);
+            //myToast.show() ;
+            if(cmd[9] == M_APP_REQUEST_LINK_NODE){
+                if((deviceMax > 8)&&(deviceMax != D_deviceMaxNone))
+                    return;
+                //if(deviceMax == 0)
+                //    return;
+                //if(deviceIndex == deviceMax)
+                //    return;
+                cmd[10] = deviceIndex;
+                cmd[11] = 0;
+            }
+            if (mGattCharacteristics != null) {
+                final BluetoothGattCharacteristic characteristic =
+                        mGattCharacteristics.get(3).get(0);
+                final int charaProp = characteristic.getProperties();
+                if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
+                    // If there is an active notification on a characteristic, clear
+                    // it first so it doesn't update the data field on the user interface.
+                    if (mNotifyCharacteristic != null) {
+                        mBluetoothLeService.setCharacteristicNotification(
+                                mNotifyCharacteristic, false);
+                        mNotifyCharacteristic = null;
+                    }
+                    switch(cmd[9])
+                    {
+                        case M_SENSOR_TEMPERATURE:break;
+                        case M_SENSOR_HUMIDITY:break;
+                        case M_SENSOR_PRESSURE:break;
+                        case M_SENSOR_AMBLIGHT:break;
+                        case M_SENSOR_UVINDEX:break;
+                        case M_SENSOR_MIC:break;
+                        case M_SENSOR_ECO2:break;
+                        case M_SENSOR_TVOC:break;
+                        case M_SENSOR_HALLSTATE:break;
+                        case M_SENSOR_HALLMAGNETICFIELD:break;
+                        case M_APP_REQUEST_LINK_NODE:break;
+                        //case M_APP_ERROR_INFO:break;
+                        default:
+                            //return;
+                            cmd[9] = M_SENSOR_TEMPERATURE;
+                            break;
+                    }
+                    mBluetoothLeService.writeCharacteristic(characteristic, cmd);
+                    characteristicHandler.removeCallbacks(runnableWrite);
+                    characteristicHandler.removeCallbacks(runnableRead);
+                    characteristicHandler.postDelayed(runnableRead, 100);
+                }
+                if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                    mNotifyCharacteristic = characteristic;
+                    mBluetoothLeService.setCharacteristicNotification(
+                            characteristic, true);
+                }
+            }
+        }
+    };
+	
+    private Runnable runnableRead = new Runnable( ) {
+        public void run ( ) {
+            //Toast myToast = Toast.makeText(DeviceControlActivity.this, "Handler read",Toast.LENGTH_LONG);
+            //myToast.show() ;
+            if (mGattCharacteristics != null) {
+                final BluetoothGattCharacteristic characteristic =
+                        mGattCharacteristics.get(3).get(0);
+                final int charaProp = characteristic.getProperties();
+                if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
+                    // If there is an active notification on a characteristic, clear
+                    // it first so it doesn't update the data field on the user interface.
+                    if (mNotifyCharacteristic != null) {
+                        mBluetoothLeService.setCharacteristicNotification(
+                                mNotifyCharacteristic, false);
+                        mNotifyCharacteristic = null;
+                    }
+
+                    mBluetoothLeService.readCharacteristic(characteristic);
+			        if(cmd[9] < M_SENSOR_HALLMAGNETICFIELD) {
+                        cmd[9]++;
+                        characteristicHandler.removeCallbacks(runnableWrite);
+                        characteristicHandler.removeCallbacks(runnableRead);
+                        characteristicHandler.postDelayed(runnableWrite, 100);
+                    }
+                }
+                if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                    mNotifyCharacteristic = characteristic;
+                    mBluetoothLeService.setCharacteristicNotification(
+                            characteristic, true);
+                }
             }
         }
     };
@@ -130,35 +292,76 @@ public class DeviceControlActivity extends Activity {
                 @Override
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
                                             int childPosition, long id) {
-                    if (mGattCharacteristics != null) {
-                        final BluetoothGattCharacteristic characteristic =
-                                mGattCharacteristics.get(groupPosition).get(childPosition);
-                        final int charaProp = characteristic.getProperties();
-                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
-                            // If there is an active notification on a characteristic, clear
-                            // it first so it doesn't update the data field on the user interface.
-                            if (mNotifyCharacteristic != null) {
-                                mBluetoothLeService.setCharacteristicNotification(
-                                        mNotifyCharacteristic, false);
-                                mNotifyCharacteristic = null;
-                            }
+                    if(true) {
+                        //byte[][] d_list = {
+                        //        {(byte)0x00,(byte)0x8A,(byte)0x7F,(byte)0x7B,(byte)0xFE,(byte)0xFF,(byte)0x9F,(byte)0xFD,(byte)0x90},
+                        //        {(byte)0x00,(byte)0x50,(byte)0x81,(byte)0x7B,(byte)0xFE,(byte)0xFF,(byte)0x9F,(byte)0xFD,(byte)0x90},
+                        //        {(byte)0x00,(byte)0xC2,(byte)0x53,(byte)0xBE,(byte)0xFE,(byte)0xFF,(byte)0x57,(byte)0x0B,(byte)0x00},
+                        //};
 
-                            mBluetoothLeService.readCharacteristic(characteristic);
+                        if (mGattCharacteristics != null) {
+                            final BluetoothGattCharacteristic characteristic =
+                                    mGattCharacteristics.get(3).get(0);
+                            final int charaProp = characteristic.getProperties();
+                            if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
+                                // If there is an active notification on a characteristic, clear
+                                // it first so it doesn't update the data field on the user interface.
+                                if (mNotifyCharacteristic != null) {
+                                    mBluetoothLeService.setCharacteristicNotification(
+                                            mNotifyCharacteristic, false);
+                                    mNotifyCharacteristic = null;
+                                }
+                                //Toast myToast = Toast.makeText(DeviceControlActivity.this, "groupPosition", Toast.LENGTH_LONG);
+                                //myToast.show();
+                                //cmd = mBluetoothLeService.getCharacteristicData();
+                                deviceDataReadIndex = groupPosition;
+                                System.arraycopy(deviceList[deviceDataReadIndex], 0, cmd, 0, deviceList[deviceDataReadIndex].length);
+                                cmd[9] = M_SENSOR_TEMPERATURE;
+                                characteristicHandler.removeCallbacks(runnableWrite);
+                                characteristicHandler.removeCallbacks(runnableRead);
+                                characteristicHandler.postDelayed(runnableWrite, 100);
+                            }
+                            if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                                mNotifyCharacteristic = characteristic;
+                                mBluetoothLeService.setCharacteristicNotification(
+                                        characteristic, true);
+                            }
                         }
-                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
-                            mNotifyCharacteristic = characteristic;
-                            mBluetoothLeService.setCharacteristicNotification(
-                                    characteristic, true);
+                    }else {
+                        if (mGattCharacteristics != null) {
+                            final BluetoothGattCharacteristic characteristic =
+                                    mGattCharacteristics.get(groupPosition).get(childPosition);
+                            final int charaProp = characteristic.getProperties();
+                            if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
+                                // If there is an active notification on a characteristic, clear
+                                // it first so it doesn't update the data field on the user interface.
+                                if (mNotifyCharacteristic != null) {
+                                    mBluetoothLeService.setCharacteristicNotification(
+                                            mNotifyCharacteristic, false);
+                                    mNotifyCharacteristic = null;
+                                }
+
+                                mBluetoothLeService.readCharacteristic(characteristic);
+                            }
+                            if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                                mNotifyCharacteristic = characteristic;
+                                mBluetoothLeService.setCharacteristicNotification(
+                                        characteristic, true);
+                            }
+                            return true;
                         }
-                        return true;
                     }
                     return false;
                 }
+
     };
+
 
     private void clearUI() {
         mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
         mDataField.setText(R.string.no_data);
+		characteristicHandler.removeCallbacks(runnableWrite);
+        characteristicHandler.removeCallbacks(runnableRead);
     }
 
     @Override
@@ -235,12 +438,11 @@ public class DeviceControlActivity extends Activity {
                                 mNotifyCharacteristic, false);
                         mNotifyCharacteristic = null;
                     }
-                    Toast myToast = Toast.makeText(DeviceControlActivity.this, "Characteristic write" + mBluetoothLeService.byteArrayToString(cmd),Toast.LENGTH_LONG);
+                    Toast myToast = Toast.makeText(DeviceControlActivity.this, "Characteristic write",Toast.LENGTH_LONG);
                     myToast.show() ;
                     byte[] dataByte = mBluetoothLeService.getCharacteristicData();
-                    dataByte[9] = cmd[0];
-                    if(cmd[0]++ > 0x1A)
-                        cmd[0] = 0x10;
+                    if(dataByte[9]++ > 0x1A)
+                        dataByte[9] = 0x10;
                     mBluetoothLeService.writeCharacteristic(characteristic,dataByte);
                 }
                 if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
@@ -257,6 +459,41 @@ public class DeviceControlActivity extends Activity {
             mButton_n.setBackgroundColor(0xFF0000FF);
             Toast myToast = Toast.makeText(DeviceControlActivity.this, "Characteristic noticfy",Toast.LENGTH_LONG);
             myToast.show() ;
+            if(true) {
+                //Create Menu
+                String[] names = {"00 8A 7F 7B FE FF 9F FD 90", "00 50 81 7B FE FF 9F FD 90", "00 C2 53 BE FE FF 57 0B 00"};
+                //Create subMenu
+                String[] child_names = {"Temperatrue: 32 'C", "Humidity: 50%", "Pressure:343", "Amblight:453", "UV index: 2", "Mic: ", "IAQ Tvoc:3445", "IAQ eco2:222","Hall status: Open","Hall value:1234"};
+                device_list.clear();
+                sensor_items.clear();
+                for (int i = 0; i < names.length; i++) {
+                    Map<String, String> namedata = new HashMap<String, String>();
+                    namedata.put("names", names[i]);
+                    device_list.add(namedata);
+
+                    List<Map<String, String>> child_map = new ArrayList<Map<String, String>>();
+                    for (int j = 0; j < child_names.length; j++) {
+                        Map<String, String> mapcs = new HashMap<String, String>();
+                        mapcs.put("child_names", child_names[j]);
+                        child_map.add(mapcs);
+                    }
+                    sensor_items.add(child_map);
+                }
+                SimpleExpandableListAdapter sela = new SimpleExpandableListAdapter(
+                        DeviceControlActivity.this,
+                        device_list,
+                        R.layout.device_list,
+                        new String[]{"names"},
+                        new int[]{R.id.textGroup},
+                        sensor_items,
+                        R.layout.sensor_items,
+                        new String[]{"child_names"},
+                        new int[]{R.id.textChild});
+                // Clear list
+                mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
+                // enqueue
+                mGattServicesList.setAdapter(sela);
+            }
         }
     };
 
@@ -266,11 +503,32 @@ public class DeviceControlActivity extends Activity {
 
             Toast myToast = Toast.makeText(DeviceControlActivity.this, "Characteristic dmp",Toast.LENGTH_LONG);
             myToast.show() ;
+            if(true){
+				deviceIndex = 0;
+				deviceMax = D_deviceMaxNone;
+				// Clear list
+                mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
 
-            final Intent intent = new Intent(DeviceControlActivity.this, DMPActivity.class);
-            intent.putExtra(DMPActivity.EXTRAS_DMP_DEVICE_NAME, mDeviceName);
-            intent.putExtra(DMPActivity.EXTRAS_DMP_DEVICE_NAME, mDeviceAddress);
-            startActivity(intent);
+			    cmd[9] = M_APP_REQUEST_LINK_NODE;
+				characteristicHandler.removeCallbacks(runnableWrite);
+				characteristicHandler.removeCallbacks(runnableRead);
+				characteristicHandler.postDelayed(runnableWrite, 100);
+            }else{
+                SimpleExpandableListAdapter sela = new SimpleExpandableListAdapter(
+                        DeviceControlActivity.this,
+                        device_list,
+                        R.layout.device_list,
+                        new String[]{"names"},
+                        new int[]{R.id.textGroup},
+                        sensor_items,
+                        R.layout.sensor_items,
+                        new String[]{"child_names"},
+                        new int[]{R.id.textChild});
+                // Clear list
+                mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
+                // enqueue
+                mGattServicesList.setAdapter(sela);
+            }
         }
     };
 
@@ -288,6 +546,8 @@ public class DeviceControlActivity extends Activity {
     protected void onPause() {
         super.onPause();
         unregisterReceiver(mGattUpdateReceiver);
+        characteristicHandler.removeCallbacks(runnableWrite);
+        characteristicHandler.removeCallbacks(runnableRead);
     }
 
     @Override
@@ -295,6 +555,8 @@ public class DeviceControlActivity extends Activity {
         super.onDestroy();
         unbindService(mServiceConnection);
         mBluetoothLeService = null;
+        characteristicHandler.removeCallbacks(runnableWrite);
+        characteristicHandler.removeCallbacks(runnableRead);
     }
 
     @Override
@@ -333,6 +595,121 @@ public class DeviceControlActivity extends Activity {
                 mConnectionState.setText(resourceId);
             }
         });
+    }
+
+    private void displayDeviceData(byte[] data) {
+        if (data == null)
+            return;
+        if(data[9] > D_packetErrorInfo)
+            return;
+
+        //Create subMenu
+        String[] child_names = new String[10];
+		switch(data[9]){
+			case D_packetTemperature:
+                temperature = mBluetoothLeService.byte2Int(data,10);
+			    break;
+			case D_packetHumidity:
+                humidity = mBluetoothLeService.getUnsignedIntt(mBluetoothLeService.byte2Int(data,10));
+			    break;
+			case D_packetPressure:
+                pressure = mBluetoothLeService.byte2float(data,10);
+			    break;
+			case D_packetAmbLight:
+                ambLight = mBluetoothLeService.getUnsignedIntt(mBluetoothLeService.byte2Int(data,10));
+			    break;
+			case D_packetUVIndex:
+                uvIndex = mBluetoothLeService.getUnsignedByte(data[10]);
+			    break;
+			case D_packetMic:
+			    mic = mBluetoothLeService.byte2float(data,10);
+			    break;
+			case D_packetECO2:
+
+			    break;
+			case D_packetTVOC:
+
+			    break;
+			case D_packetHallState:
+
+			    break;
+			case D_packetHallMagneticField:
+
+			    break;
+			case D_packetLinkInfo:
+
+				deviceIndex = data[10];
+				deviceMax = data[11];
+				if((deviceIndex == 0)||(deviceMax == 0)||(deviceMax > 8)){
+					deviceMax = D_deviceMaxNone - 1;
+					characteristicHandler.removeCallbacks(runnableWrite);
+		                    characteristicHandler.removeCallbacks(runnableRead);
+		                    characteristicHandler.postDelayed(runnableRead, 100);
+					return;
+				}
+				System.arraycopy(data, 0, deviceList[deviceIndex - 1], 0, 9);
+				if(deviceIndex < deviceMax){
+                    characteristicHandler.removeCallbacks(runnableWrite);
+                    characteristicHandler.removeCallbacks(runnableRead);
+                    characteristicHandler.postDelayed(runnableWrite, 100);
+                }
+			    break;
+			case D_packetErrorInfo:
+				
+			    break;
+		}
+        {
+            if (data[9] == D_packetLinkInfo) {
+                for (int i = 0; i < deviceIndex; i++) {
+                    names[i] = "Device" + Integer.toString(i) + " " + mBluetoothLeService.byteArray2String(deviceList[i]);
+                }
+            }
+            child_names[0] = "Temperatrue:" + Float.toString((float) temperature / 1000.0f) + "℃";
+            child_names[1] = "Humidity:" + Float.toString((float) humidity / 1000.0f) + "%";
+            child_names[2] = "Pressure:" + Float.toString(pressure);
+            child_names[3] = "AmbLight:" + Float.toString((float) ambLight / 100.0f);
+            child_names[4] = "UVIndex:" + Integer.toString(uvIndex);
+            child_names[5] = "Mic:" + Float.toString(mic) + "dB";
+            child_names[6] = "ECO2:";
+            child_names[7] = "TVOC:";
+            child_names[8] = "Hall state: ";
+            child_names[9] = "Hall value:";
+        }
+		device_list.clear();
+        sensor_items.clear();
+        for (int i = 0; i < deviceIndex/*names.length*/; i++) {
+            Map<String, String> namedata = new HashMap<String, String>();
+            namedata.put("names", names[i]);
+            device_list.add(namedata);
+
+            List<Map<String, String>> child_map = new ArrayList<Map<String, String>>();
+            for (int j = 0; j < child_names.length; j++) {
+                Map<String, String> mapcs = new HashMap<String, String>();
+                mapcs.put("child_names", child_names[j]);
+                child_map.add(mapcs);
+            }
+            sensor_items.add(child_map);
+        }
+
+        SimpleExpandableListAdapter sela = new SimpleExpandableListAdapter(
+                DeviceControlActivity.this,
+                device_list,
+                R.layout.device_list,
+                new String[]{"names"},
+                new int[]{R.id.textGroup},
+                sensor_items,
+                R.layout.sensor_items,
+                new String[]{"child_names"},
+                new int[]{R.id.textChild});
+        // Clear list
+        mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
+        // enqueue
+        mGattServicesList.setAdapter(sela);
+        //for(int i = 0;i< deviceIndex;i++ ) {
+        //    mGattServicesList.collapseGroup(i);
+        //}
+        mGattServicesList.expandGroup(deviceDataReadIndex);
+
     }
 
     private void displayData(String data) {
@@ -383,19 +760,20 @@ public class DeviceControlActivity extends Activity {
             mGattCharacteristics.add(charas);
             gattCharacteristicData.add(gattCharacteristicGroupData);
         }
-
+        if(false) {
         SimpleExpandableListAdapter gattServiceAdapter = new SimpleExpandableListAdapter(
                 this,
                 gattServiceData,
                 android.R.layout.simple_expandable_list_item_2,
-                new String[] {LIST_NAME, LIST_UUID},
-                new int[] { android.R.id.text1, android.R.id.text2 },
+                new String[]{LIST_NAME, LIST_UUID},
+                new int[]{android.R.id.text1, android.R.id.text2},
                 gattCharacteristicData,
                 android.R.layout.simple_expandable_list_item_2,
-                new String[] {LIST_NAME, LIST_UUID},
-                new int[] { android.R.id.text1, android.R.id.text2 }
+                new String[]{LIST_NAME, LIST_UUID},
+                new int[]{android.R.id.text1, android.R.id.text2}
         );
         mGattServicesList.setAdapter(gattServiceAdapter);
+        }
     }
 
     private static IntentFilter makeGattUpdateIntentFilter() {

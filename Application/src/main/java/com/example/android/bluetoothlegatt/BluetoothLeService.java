@@ -340,15 +340,101 @@ public class BluetoothLeService extends Service {
         return characteristicData;
     }
 
-    public String byteArrayToString(byte[] a) {
-        StringBuilder sb = new StringBuilder();
-
-        if(a != null)
-            for(byte b : a){
-                sb.append(String.format("%02X ", b));
-            }
+    public static String byteArray2String(byte[] a) {
+        if(a == null || a.length == 0)
+            return null;
+        final StringBuilder sb = new StringBuilder(a.length);
+        for(byte b : a){
+            sb.append(String.format("%02X ", b));
+        }
         return sb.toString();
     }
+
+    public static byte[] float2byte(float f)
+    {
+        int fbit = Float.floatToIntBits(f);
+
+        byte[] b = new byte[4];
+        for (int i = 0; i < 4; i++) {
+            b[i] = (byte) (fbit >> (24 - i * 8));
+        }
+        int len = b.length;
+        byte[] dest = new byte[len];
+        System.arraycopy(b, 0, dest, 0, len);
+        byte temp;
+        for (int i = 0; i < len / 2; ++i) {
+            temp = dest[i];
+            dest[i] = dest[len - i - 1];
+            dest[len - i - 1] = temp;
+        }
+        return dest;
+    }
+
+    public static float byte2float(byte[] b, int offset) {
+        int l;
+        l = b[offset + 0];
+        l &= 0xff;
+        l |= ((long) b[offset + 1] << 8);
+        l &= 0xffff;
+        l |= ((long) b[offset + 2] << 16);
+        l &= 0xffffff;
+        l |= ((long) b[offset + 3] << 24);
+        return Float.intBitsToFloat(l);
+    }
+	
+    public static int byte2Int(byte[] bytes, int offset) {
+        int b0 = bytes[offset] & 0xFF;
+        int b1 = bytes[offset + 1] & 0xFF;
+        int b2 = bytes[offset + 2] & 0xFF;
+        int b3 = bytes[offset + 3] & 0xFF;
+        return (b3 << 24) | (b2 << 16) | (b1 << 8) | b0;
+    }
+    public static byte[] int2Byte4(int i) {
+        byte[] targets = new byte[4];
+        targets[3] = (byte) (i & 0xFF);
+        targets[2] = (byte) (i >> 8 & 0xFF);
+        targets[1] = (byte) (i >> 16 & 0xFF);
+        targets[0] = (byte) (i >> 24 & 0xFF);
+        return targets;
+    }
+
+    public static byte[] long2Byte8(long lo) {
+        byte[] targets = new byte[8];
+        for (int i = 0; i < 8; i++) {
+            int offset = (targets.length - 1 - i) * 8;
+            targets[i] = (byte) ((lo >>> offset) & 0xFF);
+        }
+        return targets;
+    }
+
+    public static byte[] unsignedShort2Byte(int s) {
+        byte[] targets = new byte[2];
+        targets[0] = (byte) (s >> 8 & 0xFF);
+        targets[1] = (byte) (s & 0xFF);
+        return targets;
+    }
+
+    public static int byte2UnsignedShort(byte[] bytes) {
+        return byte2UnsignedShort(bytes, 0);
+    }
+
+    public static int byte2UnsignedShort(byte[] bytes, int offset) {
+        int high = bytes[offset];
+        int low = bytes[offset + 1];
+        return (high << 8 & 0xFF00) | (low & 0xFF);
+    }
+
+	public int getUnsignedByte (byte data){ //byte data change to 0~255 (0xFF means BYTE)
+	    return data&0x0FF ;
+	}
+
+	public int getUnsignedByte (short data){ //data change to 0~65535 (0xFFFF means WORD)
+	    return data&0x0FFFF ;
+	}
+
+	public long getUnsignedIntt (int data){ //int change to 0~4294967295 (0xFFFFFFFF means DWORD)
+	    return data&0x0FFFFFFFF ;
+	}
 
     /**
      * Retrieves a list of supported GATT services on the connected device. This should be

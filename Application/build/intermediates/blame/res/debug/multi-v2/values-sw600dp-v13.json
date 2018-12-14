@@ -1,20 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\android\\BluetoothLeGatt\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+            "outputFile": "D:\\android\\BluetoothLeGatt\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\ersu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\8f053ff5885e7eeaa55bd38c49b95583\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,124,193,263,337,413,472,543",
-                        "endColumns": "68,68,69,73,75,58,70,67",
-                        "endOffsets": "119,188,258,332,408,467,538,606"
-                    }
-                },
-                {
-                    "source": "C:\\android\\BluetoothLeGatt\\Application\\src\\main\\res\\values-sw600dp\\template-styles.xml",
+                    "source": "D:\\android\\BluetoothLeGatt\\Application\\src\\main\\res\\values-sw600dp\\template-styles.xml",
                     "from": {
                         "startLines": "18",
                         "startColumns": "4",
@@ -33,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\android\\BluetoothLeGatt\\Application\\src\\main\\res\\values-sw600dp\\template-dimens.xml",
+                    "source": "D:\\android\\BluetoothLeGatt\\Application\\src\\main\\res\\values-sw600dp\\template-dimens.xml",
                     "from": {
                         "startLines": "20,21",
                         "startColumns": "4,4",
@@ -47,6 +37,16 @@
                         "startOffsets": "611,679",
                         "endColumns": "67,67",
                         "endOffsets": "674,742"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\suhuide\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\b5bb99c057abb37403df92351e75b9d5\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,124,193,263,337,413,472,543",
+                        "endColumns": "68,68,69,73,75,58,70,67",
+                        "endOffsets": "119,188,258,332,408,467,538,606"
                     }
                 }
             ]

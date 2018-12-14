@@ -45,7 +45,6 @@
         android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:testOnly="true"
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
             android:name="com.example.android.bluetoothlegatt.DeviceScanActivity"
@@ -54,15 +53,6 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.example.android.bluetoothlegatt.DMPActivity"
-            android:label="DMPActivity" >
-            <intent-filter>
-                <action android:name="DMPActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name="com.example.android.bluetoothlegatt.DeviceControlActivity" />
