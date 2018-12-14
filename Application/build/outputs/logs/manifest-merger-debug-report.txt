@@ -65,7 +65,7 @@ MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\su
 activity#com.example.android.bluetoothlegatt.DeviceScanActivity
 ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:41:9-47:20
 	android:label
-		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:42:13-45
+		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:42:13-41
 	android:name
 		ADDED from D:\android\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:41:19-53
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
